@@ -54,16 +54,17 @@ description: >-
 
 The body should contain these sections in order:
 
-| Section                | Purpose                                                  |
-|------------------------|----------------------------------------------------------|
-| `# Title`             | Human-readable skill name                                |
-| `## Goal`             | What the skill achieves (1-3 sentences)                  |
-| `## When to Use`      | Trigger conditions and example user prompts              |
-| `## Workflow`          | Step-by-step instructions the agent follows              |
-| `## Guardrails`        | Safety rules and constraints                             |
-| `## Completion Checklist` | Checklist to verify the skill was applied correctly  |
+| Section                   | Purpose                                             |
+| ------------------------- | --------------------------------------------------- |
+| `# Title`                 | Human-readable skill name                           |
+| `## Goal`                 | What the skill achieves (1-3 sentences)             |
+| `## When to Use`          | Trigger conditions and example user prompts         |
+| `## Workflow`             | Step-by-step instructions the agent follows         |
+| `## Guardrails`           | Safety rules and constraints                        |
+| `## Completion Checklist` | Checklist to verify the skill was applied correctly |
 
 Optional sections (use when appropriate):
+
 - `## Scoring Dimensions` or `## Evaluation Criteria` — for audit/assessment skills
 - `## Template Guidance` — for skills that generate files from templates
 
@@ -132,7 +133,11 @@ Since skills are instructions, "error handling" means:
 6. Include `## Completion Checklist` — every skill must be verifiable
 7. **Update `README.md`** — add the new skill to the "Available Skills" table
 8. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
-9. Commit with message: `Add <skill-name> skill`
+9. Create or refresh your local skill symlink:
+   - `mkdir -p "$HOME/.agents/skills"`
+   - `ln -sfn "$(pwd)/skills/<skill-name>" "$HOME/.agents/skills/<skill-name>"`
+   - `ls -l "$HOME/.agents/skills/<skill-name>"` (verify it points to `skills/<skill-name>`)
+10. Commit with message: `Add <skill-name> skill`
 
 ## Common Mistakes to Avoid
 
@@ -144,10 +149,11 @@ Since skills are instructions, "error handling" means:
 - Do not reference external URLs that may break — prefer inline instructions
 - Do not add skills that duplicate existing ones — check existing skills first
 - Do not forget to update `README.md` and `AGENTS.md` after adding a new skill
+- Do not forget to create/update the `~/.agents/skills/<skill-name>` symlink after adding or moving a skill
 
 ## Existing Skills Reference
 
-| Skill | Purpose |
-|-------|---------|
-| `agent-native-audit` | Audit and score a codebase for AI agent readiness |
-| `ci-verify-setup` | Set up a `verify` command and GitHub Actions CI workflow |
+| Skill                | Purpose                                                  |
+| -------------------- | -------------------------------------------------------- |
+| `agent-native-audit` | Audit and score a codebase for AI agent readiness        |
+| `ci-verify-setup`    | Set up a `verify` command and GitHub Actions CI workflow |
