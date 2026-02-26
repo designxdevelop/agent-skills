@@ -38,6 +38,8 @@ agent-skills/
 2. Add `<skill-name>/SKILL.md` with the required frontmatter and sections
 3. Ensure the frontmatter `name` matches the directory name
 4. Include `## Guardrails` and `## Completion Checklist` — both are required
-5. Commit: `Add <skill-name> skill`
+5. **Update `README.md`** — add the new skill to the "Available Skills" table above
+6. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
+7. Commit: `Add <skill-name> skill`
 
 See [AGENTS.md](AGENTS.md) for the full file format specification and style guidelines.

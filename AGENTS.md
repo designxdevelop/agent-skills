@@ -129,7 +129,9 @@ Since skills are instructions, "error handling" means:
 4. Ensure the `description` includes trigger phrases for agent routing
 5. Include `## Guardrails` — every skill must have safety constraints
 6. Include `## Completion Checklist` — every skill must be verifiable
-7. Commit with message: `Add <skill-name> skill`
+7. **Update `README.md`** — add the new skill to the "Available Skills" table
+8. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
+9. Commit with message: `Add <skill-name> skill`
 
 ## Common Mistakes to Avoid
 
@@ -140,6 +142,7 @@ Since skills are instructions, "error handling" means:
 - Do not write vague workflow steps ("improve the code") — be specific and actionable
 - Do not reference external URLs that may break — prefer inline instructions
 - Do not add skills that duplicate existing ones — check existing skills first
+- Do not forget to update `README.md` and `AGENTS.md` after adding a new skill
 
 ## Existing Skills Reference
 
