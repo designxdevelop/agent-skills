@@ -8,8 +8,8 @@ Skills are designed to be loaded by agent routers (Claude Code, Cursor, Copilot,
 
 | Skill | Description |
 |-------|-------------|
-| [agent-native-audit](agent-native-audit/SKILL.md) | Audit and score a codebase for AI agent readiness across five dimensions |
-| [ci-verify-setup](ci-verify-setup/SKILL.md) | Set up a project-level `verify` command and GitHub Actions CI workflow |
+| [agent-native-audit](skills/agent-native-audit/SKILL.md) | Audit and score a codebase for AI agent readiness across five dimensions |
+| [ci-verify-setup](skills/ci-verify-setup/SKILL.md) | Set up a project-level `verify` command and GitHub Actions CI workflow |
 
 ## Skill Format
 
@@ -24,18 +24,19 @@ Each skill lives in its own directory and contains a single `SKILL.md` with:
 
 ```
 agent-skills/
-├── agent-native-audit/
-│   └── SKILL.md
-├── ci-verify-setup/
-│   └── SKILL.md
+├── skills/
+│   ├── agent-native-audit/
+│   │   └── SKILL.md
+│   └── ci-verify-setup/
+│       └── SKILL.md
 ├── AGENTS.md
 └── README.md
 ```
 
 ## Adding a Skill
 
-1. Create a directory: `mkdir <skill-name>` (kebab-case)
-2. Add `<skill-name>/SKILL.md` with the required frontmatter and sections
+1. Create a directory: `mkdir -p skills/<skill-name>` (kebab-case)
+2. Add `skills/<skill-name>/SKILL.md` with the required frontmatter and sections
 3. Ensure the frontmatter `name` matches the directory name
 4. Include `## Guardrails` and `## Completion Checklist` — both are required
 5. **Update `README.md`** — add the new skill to the "Available Skills" table above

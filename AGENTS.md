@@ -13,13 +13,14 @@ no build step, no test suite, and no package manager.
 
 ```
 agent-skills/
-├── <skill-name>/
-│   └── SKILL.md          # Skill definition file
+├── skills/
+│   └── <skill-name>/
+│       └── SKILL.md      # Skill definition file
 ├── README.md
 └── AGENTS.md             # This file
 ```
 
-Each skill lives in its own directory named after the skill, containing a single `SKILL.md`.
+Each skill lives in `skills/<skill-name>/`, containing a single `SKILL.md`.
 
 ## Build / Lint / Test Commands
 
@@ -123,8 +124,8 @@ Since skills are instructions, "error handling" means:
 
 ## Adding a New Skill
 
-1. Create a directory: `mkdir <skill-name>` (kebab-case)
-2. Create `<skill-name>/SKILL.md` with the required frontmatter and sections
+1. Create a directory: `mkdir -p skills/<skill-name>` (kebab-case)
+2. Create `skills/<skill-name>/SKILL.md` with the required frontmatter and sections
 3. Verify the frontmatter `name` matches the directory name
 4. Ensure the `description` includes trigger phrases for agent routing
 5. Include `## Guardrails` — every skill must have safety constraints
