@@ -153,7 +153,8 @@ Since skills are instructions, "error handling" means:
 
 ## Existing Skills Reference
 
-| Skill                | Purpose                                                  |
-| -------------------- | -------------------------------------------------------- |
-| `agent-native-audit` | Audit and score a codebase for AI agent readiness        |
-| `ci-verify-setup`    | Set up a `verify` command and GitHub Actions CI workflow |
+| Skill                       | Purpose                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| `agent-native-audit`        | Audit and score a codebase for AI agent readiness        |
+| `ci-verify-setup`           | Set up a `verify` command and GitHub Actions CI workflow |
+| `live-work-context-cleanup` | Recover live context and clean up cross-tool work safely |

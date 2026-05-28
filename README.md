@@ -10,6 +10,7 @@ Skills are designed to be loaded by agent routers (Claude Code, Cursor, Copilot,
 |-------|-------------|
 | [agent-native-audit](skills/agent-native-audit/SKILL.md) | Audit and score a codebase for AI agent readiness across five dimensions |
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md) | Set up a project-level `verify` command and GitHub Actions CI workflow |
+| [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
 
 ## Skill Format
 
