@@ -6,8 +6,10 @@ Instructions for AI coding agents working in this repository.
 
 This is a **documentation-only** repository containing reusable "skills" for AI coding agents.
 Each skill is a structured Markdown file that provides instructions, workflows, and guardrails
-for a specific task domain (e.g., CI setup, codebase auditing). There is no application code,
-no build step, no test suite, and no package manager.
+for a specific task domain (e.g., CI setup, codebase auditing). These skills should stay
+portable across Codex, Claude Code, Cursor, Copilot, and other agent tools unless a skill is
+explicitly tool-specific. There is no application code, no build step, no test suite, and no
+package manager.
 
 ## Project Structure
 
@@ -47,8 +49,9 @@ description: >-
 ```
 
 - `name` — Must match the parent directory name. Always `kebab-case`.
-- `description` — A single paragraph. Include natural-language trigger phrases
-  so agent routers can match user intent to the skill.
+- `description` — A single paragraph of trigger conditions. Include natural-language
+  phrases so agent routers can match user intent to the skill, but do not summarize the
+  workflow; agents should read the body for process details.
 
 ### 2. Markdown Body (required sections)
 
@@ -98,6 +101,9 @@ Optional sections (use when appropriate):
 
 - Write instructions in second person imperative ("Read the config", "Check for...")
 - Be specific: include file paths, command examples, and expected output formats
+- Keep skills tool-agnostic unless the skill is intentionally about one tool. Mention
+  Codex, Claude Code, Cursor, Copilot, or SaaS/browser connectors only when the distinction
+  changes agent behavior.
 - Guardrails must include "never" statements for destructive actions
 - Workflow steps should be numbered and actionable by an AI agent
 - Prefer composing existing tools/scripts over inventing new ones
@@ -133,7 +139,8 @@ Since skills are instructions, "error handling" means:
 6. Include `## Completion Checklist` — every skill must be verifiable
 7. **Update `README.md`** — add the new skill to the "Available Skills" table
 8. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
-9. Create or refresh your local skill symlink:
+9. Create or refresh the local registration/symlink for the agent tools you use. For the
+   shared `~/.agents/skills` registry:
    - `mkdir -p "$HOME/.agents/skills"`
    - `ln -sfn "$(pwd)/skills/<skill-name>" "$HOME/.agents/skills/<skill-name>"`
    - `ls -l "$HOME/.agents/skills/<skill-name>"` (verify it points to `skills/<skill-name>`)
@@ -149,13 +156,13 @@ Since skills are instructions, "error handling" means:
 - Do not reference external URLs that may break — prefer inline instructions
 - Do not add skills that duplicate existing ones — check existing skills first
 - Do not forget to update `README.md` and `AGENTS.md` after adding a new skill
-- Do not forget to create/update the `~/.agents/skills/<skill-name>` symlink after adding or moving a skill
+- Do not forget to create/update the shared skill registry or tool-specific registration after adding or moving a skill
 
 ## Existing Skills Reference
 
 | Skill                                | Purpose                                                  |
 | ------------------------------------ | -------------------------------------------------------- |
-| `agent-native-audit`                 | Audit and score a codebase for AI agent readiness        |
-| `ci-verify-setup`                    | Set up a `verify` command and GitHub Actions CI workflow |
+| `agent-native-audit`                 | Audit and score a codebase for cross-agent readiness     |
+| `ci-verify-setup`                    | Set up one verification command and matching CI          |
 | `live-work-context-cleanup`          | Recover live context and clean up cross-tool work safely |
-| `thermo-nuclear-code-quality-review` | Run a strict maintainability and abstraction review      |
+| `dxd-code-review`                    | Run a strict DXD maintainability and abstraction review  |

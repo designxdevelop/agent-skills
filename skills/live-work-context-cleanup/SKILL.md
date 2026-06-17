@@ -1,17 +1,14 @@
 ---
 name: live-work-context-cleanup
 description: >-
-  Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos. Use when the user says "look at what I was doing", "check the active tab", "clean up the noise", "figure out the current task", "use Chronicle", "verify the live page", "fix the automation", or asks an agent to continue work that may span Chrome, Webflow, Gmail, Slack, Google Docs, Jira, PostHog, Expo/EAS, or a local codebase.
+  Use when the user asks to recover recent work, inspect the active tab or live page, clean up noisy tool state, continue an ambiguous cross-tool task, verify whether a change is actually live, or fix work that may span browser state, SaaS tools, local repos, release tooling, analytics, email, docs, or automation config.
 ---
 
 # Live Work Context Cleanup
 
 ## Goal
 
-Find the real source of truth for an ambiguous or cross-tool task, classify the
-work lane, and complete the smallest safe cleanup or continuation. This skill is
-for agent work where the visible browser/app state, saved context, and local
-repo may disagree.
+Find the real source of truth for an ambiguous or cross-tool task, classify the work lane, and complete the smallest safe cleanup or continuation. This skill is tool-agnostic: use it across Cursor, Codex, Claude Code, browser agents, SaaS connectors, terminal agents, and local repos.
 
 ## When to Use
 
@@ -72,7 +69,12 @@ Example prompts:
    - For release work, report exact command, cwd, artifact path, build number, and final blocker or success.
    - For cleanup, report what changed and what you intentionally left alone.
 
-7. **Return a concise handoff.**
+7. **Stop instead of guessing when the state is unsafe.**
+   - Stop for login walls, passkeys, captchas, missing permissions, wrong account/workspace, or destructive confirmations.
+   - Stop when live state and local state disagree and you cannot determine which one the user cares about.
+   - Stop when the cleanup target is not obviously reversible or low-risk.
+
+8. **Return a concise handoff.**
    - State the recovered context, source of truth, actions taken, and verification result.
    - Include remaining blockers only when they require user input or external state.
    - Preserve exact handles that future agents should search first: page names, class names, script names, automation ids, ticket names, or command names.
@@ -85,6 +87,7 @@ Example prompts:
 - Never claim an automation or release is fixed after only changing descriptive prompt text; verify the actual runtime/config condition.
 - Never override unrelated dirty work in a repo. Read it, work around it, or ask if it blocks the task.
 - Never keep working a surface after the user corrects the target surface or platform.
+- Never proceed through login, captcha, account switching, permission, or destructive-confirmation blockers by improvising.
 
 ## Completion Checklist
 
@@ -93,5 +96,6 @@ Example prompts:
 - [ ] The source of truth was named explicitly.
 - [ ] Actions were limited to the requested surface and risk level.
 - [ ] Verification happened in the same system the user cares about.
+- [ ] Blockers such as wrong account, login, captcha, stale state, or destructive confirmation were stopped and reported.
 - [ ] The final response included exact handles future agents can reuse.
 - [ ] Destructive actions were avoided unless explicitly requested.
