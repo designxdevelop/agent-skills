@@ -1,7 +1,7 @@
 ---
 name: dxd-code-review
 description: >-
-  Use when the user asks for DXD code review, dxd-code-review, a thermo-nuclear review, thermonuclear review, harsh maintainability review, deep code quality audit, abstraction review, giant-file review, spaghetti-code review, or structural critique of current branch changes.
+  Use when the user asks for DXD code review, dxd-code-review, harsh maintainability review, deep code quality audit, abstraction review, giant-file review, spaghetti-code review, or structural critique of current branch changes.
 disable-model-invocation: true
 ---
 
@@ -20,11 +20,11 @@ Perform a deep code-quality audit of the current branch's changes, with an unusu
 Use this skill when the user asks for:
 
 - DXD code review or `dxd-code-review`.
-- A thermo-nuclear code quality review.
-- A thermonuclear review.
 - A deep code quality audit.
 - An especially harsh maintainability review.
 - A review focused on abstraction quality, giant files, or spaghetti-condition growth.
+
+For a "thermo-nuclear" / thermonuclear review, use the `thermo-nuclear-code-quality-review` skill from cursor-team-kit instead.
 
 ## Review Lens
 
