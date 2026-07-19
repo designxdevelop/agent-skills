@@ -139,11 +139,12 @@ Since skills are instructions, "error handling" means:
 6. Include `## Completion Checklist` — every skill must be verifiable
 7. **Update `README.md`** — add the new skill to the "Available Skills" table
 8. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
-9. Create or refresh the local registration/symlink for the agent tools you use. For the
-   shared `~/.agents/skills` registry:
-   - `mkdir -p "$HOME/.agents/skills"`
-   - `ln -sfn "$(pwd)/skills/<skill-name>" "$HOME/.agents/skills/<skill-name>"`
-   - `ls -l "$HOME/.agents/skills/<skill-name>"` (verify it points to `skills/<skill-name>`)
+9. Sync local agent symlinks (one-time setup per clone, then automatic after commits):
+   - `./scripts/install-local-githooks.sh` — installs a **gitignored** post-commit hook under
+     `.local/githooks/` that re-links skills when `skills/` changes
+   - Or run manually anytime: `./scripts/sync-agent-symlinks.sh`
+   - Targets: `~/.agents/skills` (hub), `~/.cursor/skills`, `~/.claude/skills`,
+     `~/.codex/skills`, `~/.config/opencode/skills`
 10. Commit with message: `Add <skill-name> skill`
 
 ## Common Mistakes to Avoid

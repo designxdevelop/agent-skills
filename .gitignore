@@ -1,0 +1,2 @@
+# Local-only git hooks and install artifacts (never commit)
+.local/

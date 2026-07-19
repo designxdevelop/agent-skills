@@ -50,6 +50,8 @@ agent-skills/
 4. Include `## Guardrails` and `## Completion Checklist` — both are required
 5. **Update `README.md`** — add the new skill to the "Available Skills" table above
 6. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
-7. Commit: `Add <skill-name> skill`
+7. **Sync agent symlinks** — run `./scripts/install-local-githooks.sh` once per clone
+   (post-commit hook is gitignored; it re-links skills after commits that touch `skills/`)
+8. Commit: `Add <skill-name> skill`
 
 See [AGENTS.md](AGENTS.md) for the full file format specification and style guidelines.
