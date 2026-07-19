@@ -12,6 +12,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md) | Set up a project-level verification command and matching CI workflow |
 | [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
 | [dxd-code-review](skills/dxd-code-review/SKILL.md) | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
+| [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md) | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys |
 
 ## Skill Format
 
@@ -33,7 +34,9 @@ agent-skills/
 │   │   └── SKILL.md
 │   ├── live-work-context-cleanup/
 │   │   └── SKILL.md
-│   └── dxd-code-review/
+│   ├── dxd-code-review/
+│   │   └── SKILL.md
+│   └── quick-fix-deploy-sync/
 │       └── SKILL.md
 ├── AGENTS.md
 └── README.md

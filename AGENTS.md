@@ -166,3 +166,4 @@ Since skills are instructions, "error handling" means:
 | `ci-verify-setup`                    | Set up one verification command and matching CI          |
 | `live-work-context-cleanup`          | Recover live context and clean up cross-tool work safely |
 | `dxd-code-review`                    | Run a strict DXD maintainability and abstraction review  |
+| `quick-fix-deploy-sync`              | Fast-forward sync production and staging for hotfixes      |
