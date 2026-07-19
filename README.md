@@ -10,6 +10,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 |-------|-------------|
 | [agent-native-audit](skills/agent-native-audit/SKILL.md) | Audit and score a codebase for cross-agent readiness across five dimensions |
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md) | Set up a project-level verification command and matching CI workflow |
+| [i-have-adhd](skills/i-have-adhd/SKILL.md) | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state |
 | [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
 | [dxd-code-review](skills/dxd-code-review/SKILL.md) | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md) | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys |
@@ -31,6 +32,8 @@ agent-skills/
 │   ├── agent-native-audit/
 │   │   └── SKILL.md
 │   ├── ci-verify-setup/
+│   │   └── SKILL.md
+│   ├── i-have-adhd/
 │   │   └── SKILL.md
 │   ├── live-work-context-cleanup/
 │   │   └── SKILL.md

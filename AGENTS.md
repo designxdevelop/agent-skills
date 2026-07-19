@@ -165,6 +165,7 @@ Since skills are instructions, "error handling" means:
 | ------------------------------------ | -------------------------------------------------------- |
 | `agent-native-audit`                 | Audit and score a codebase for cross-agent readiness     |
 | `ci-verify-setup`                    | Set up one verification command and matching CI          |
+| `i-have-adhd`                        | Shape responses for ADHD-friendly reading and action     |
 | `live-work-context-cleanup`          | Recover live context and clean up cross-tool work safely |
 | `dxd-code-review`                    | Run a strict DXD maintainability and abstraction review  |
 | `quick-fix-deploy-sync`              | Fast-forward sync production and staging for hotfixes      |
