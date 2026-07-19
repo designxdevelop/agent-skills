@@ -1,5 +1,5 @@
 ---
-name: har-derive-client
+name: derive-client
 description: >-
   Use when the user wants a CLI or API client for a website that lacks a public
   SDK, asks to record browser network traffic into a HAR, reverse-engineer an
@@ -8,7 +8,7 @@ description: >-
   a flow once then derive a client.
 ---
 
-# HAR Derive Client
+# Derive Client
 
 ## Goal
 
