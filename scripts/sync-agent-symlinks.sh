@@ -4,6 +4,8 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_DIR="$REPO_ROOT/skills"
+RULES_DIR="$REPO_ROOT/rules"
+CURSOR_RULES_DIR="$HOME/.cursor/rules"
 AGENTS_HUB="$HOME/.agents/skills"
 QUIET=0
 
@@ -63,4 +65,20 @@ if [[ "$synced" -eq 0 ]]; then
   log "No skills with SKILL.md found under skills/."
 else
   log "Synced $synced skill(s) to ~/.agents/skills and agent spokes."
+fi
+
+rules_synced=0
+if [[ -d "$RULES_DIR" ]]; then
+  mkdir -p "$CURSOR_RULES_DIR"
+  for rule_path in "$RULES_DIR"/*.mdc; do
+    [[ -f "$rule_path" ]] || continue
+    name="$(basename "$rule_path")"
+    ln -sfn "$rule_path" "$CURSOR_RULES_DIR/$name"
+    rules_synced=$((rules_synced + 1))
+    log "  linked rule $name -> ~/.cursor/rules/$name"
+  done
+fi
+
+if [[ "$rules_synced" -eq 0 ]]; then
+  log "No rules/*.mdc found to sync."
 fi

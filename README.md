@@ -6,14 +6,14 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 
 ## Available Skills
 
-| Skill | Description |
-|-------|-------------|
-| [agent-native-audit](skills/agent-native-audit/SKILL.md) | Audit and score a codebase for cross-agent readiness across five dimensions |
-| [ci-verify-setup](skills/ci-verify-setup/SKILL.md) | Set up a project-level verification command and matching CI workflow |
-| [i-have-adhd](skills/i-have-adhd/SKILL.md) | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state |
+| Skill                                                                  | Description                                                                                                                   |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [agent-native-audit](skills/agent-native-audit/SKILL.md)               | Audit and score a codebase for cross-agent readiness across five dimensions                                                   |
+| [ci-verify-setup](skills/ci-verify-setup/SKILL.md)                     | Set up a project-level verification command and matching CI workflow                                                          |
+| [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
 | [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
-| [dxd-code-review](skills/dxd-code-review/SKILL.md) | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
-| [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md) | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys |
+| [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
+| [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 
 ## Skill Format
 
@@ -41,6 +41,12 @@ agent-skills/
 │   │   └── SKILL.md
 │   └── quick-fix-deploy-sync/
 │       └── SKILL.md
+├── rules/
+│   └── pstack-models.mdc   # global pstack model map (Cursor alwaysApply rule)
+├── scripts/
+│   ├── sync-agent-symlinks.sh
+│   ├── sync-pstack-skills.sh
+│   └── sync-all-agent-config.sh
 ├── AGENTS.md
 └── README.md
 ```
@@ -54,7 +60,38 @@ agent-skills/
 5. **Update `README.md`** — add the new skill to the "Available Skills" table above
 6. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
 7. **Sync agent symlinks** — run `./scripts/install-local-githooks.sh` once per clone
-   (post-commit hook is gitignored; it re-links skills after commits that touch `skills/`)
+   (post-commit hook is gitignored; it re-links skills and rules after commits that touch
+   `skills/` or `rules/`)
 8. Commit: `Add <skill-name> skill`
+
+## Global Agent Config
+
+This repo is the source of truth for machine-wide agent configuration on Austin's machines.
+
+| Path in repo  | Sync target                                                  | Purpose                                             |
+| ------------- | ------------------------------------------------------------ | --------------------------------------------------- |
+| `skills/*/`   | `~/.agents/skills/*` (+ Cursor/Claude/Codex/OpenCode spokes) | Custom DXD skills                                   |
+| `rules/*.mdc` | `~/.cursor/rules/*.mdc`                                      | Cursor always-applied rules (e.g. pstack model map) |
+
+Run a full sync anytime:
+
+```bash
+./scripts/sync-all-agent-config.sh
+```
+
+That runs:
+
+1. `./scripts/sync-agent-symlinks.sh` — custom skills + rules
+2. `./scripts/sync-pstack-skills.sh` — pstack plugin skills (if installed)
+
+### pstack (Cursor plugin + global models)
+
+[pstack](https://github.com/cursor/plugins/tree/main/pstack) is a separate Cursor plugin, not vendored here. Setup:
+
+1. In Cursor: `/add-plugin pstack` (user-level, once)
+2. Edit model roles in `rules/pstack-models.mdc`, then run `./scripts/sync-all-agent-config.sh`
+3. Use `/poteto-mode` (or `/interrogate`, `/how`, etc.) when you want rigorous agent workflows
+
+The model rule is global via `~/.cursor/rules/pstack-models.mdc`. pstack skills are symlinked into the same hub as custom skills so Codex/Claude/OpenCode spokes see them too. The `poteto-agent` subagent still requires the Cursor plugin.
 
 See [AGENTS.md](AGENTS.md) for the full file format specification and style guidelines.

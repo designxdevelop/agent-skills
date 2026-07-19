@@ -15,8 +15,8 @@ cat > "$POST_COMMIT" << 'EOF'
 # Local post-commit hook (gitignored). Syncs skill symlinks when skills/ changes.
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 
-if git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -q '^skills/'; then
-  "$ROOT/scripts/sync-agent-symlinks.sh" --quiet || true
+if git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -qE '^(skills/|rules/)'; then
+  "$ROOT/scripts/sync-all-agent-config.sh" --quiet || true
 fi
 EOF
 
@@ -25,4 +25,4 @@ ln -sfn "../../.local/githooks/post-commit" "$GIT_HOOK"
 
 echo "Installed post-commit hook -> .local/githooks/post-commit"
 echo "Running initial symlink sync..."
-"$REPO_ROOT/scripts/sync-agent-symlinks.sh"
+"$REPO_ROOT/scripts/sync-all-agent-config.sh"

@@ -18,11 +18,18 @@ agent-skills/
 ├── skills/
 │   └── <skill-name>/
 │       └── SKILL.md      # Skill definition file
+├── rules/
+│   └── *.mdc             # Cursor always-applied rules (synced to ~/.cursor/rules/)
+├── scripts/
+│   ├── sync-agent-symlinks.sh
+│   ├── sync-pstack-skills.sh
+│   └── sync-all-agent-config.sh
 ├── README.md
 └── AGENTS.md             # This file
 ```
 
 Each skill lives in `skills/<skill-name>/`, containing a single `SKILL.md`.
+Global Cursor rules live in `rules/*.mdc` and sync to `~/.cursor/rules/`.
 
 ## Build / Lint / Test Commands
 
@@ -141,10 +148,10 @@ Since skills are instructions, "error handling" means:
 8. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
 9. Sync local agent symlinks (one-time setup per clone, then automatic after commits):
    - `./scripts/install-local-githooks.sh` — installs a **gitignored** post-commit hook under
-     `.local/githooks/` that re-links skills when `skills/` changes
-   - Or run manually anytime: `./scripts/sync-agent-symlinks.sh`
+     `.local/githooks/` that re-links skills and rules when `skills/` or `rules/` changes
+   - Or run manually anytime: `./scripts/sync-all-agent-config.sh`
    - Targets: `~/.agents/skills` (hub), `~/.cursor/skills`, `~/.claude/skills`,
-     `~/.codex/skills`, `~/.config/opencode/skills`
+     `~/.codex/skills`, `~/.config/opencode/skills`, `~/.cursor/rules` (for `rules/*.mdc`)
 10. Commit with message: `Add <skill-name> skill`
 
 ## Common Mistakes to Avoid
@@ -161,11 +168,11 @@ Since skills are instructions, "error handling" means:
 
 ## Existing Skills Reference
 
-| Skill                                | Purpose                                                  |
-| ------------------------------------ | -------------------------------------------------------- |
-| `agent-native-audit`                 | Audit and score a codebase for cross-agent readiness     |
-| `ci-verify-setup`                    | Set up one verification command and matching CI          |
-| `i-have-adhd`                        | Shape responses for ADHD-friendly reading and action     |
-| `live-work-context-cleanup`          | Recover live context and clean up cross-tool work safely |
-| `dxd-code-review`                    | Run a strict DXD maintainability and abstraction review  |
-| `quick-fix-deploy-sync`              | Fast-forward sync production and staging for hotfixes      |
+| Skill                       | Purpose                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| `agent-native-audit`        | Audit and score a codebase for cross-agent readiness     |
+| `ci-verify-setup`           | Set up one verification command and matching CI          |
+| `i-have-adhd`               | Shape responses for ADHD-friendly reading and action     |
+| `live-work-context-cleanup` | Recover live context and clean up cross-tool work safely |
+| `dxd-code-review`           | Run a strict DXD maintainability and abstraction review  |
+| `quick-fix-deploy-sync`     | Fast-forward sync production and staging for hotfixes    |
