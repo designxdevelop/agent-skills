@@ -14,6 +14,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
+| [har-derive-client](skills/har-derive-client/SKILL.md)                     | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
 
 ## Skill Format
 
@@ -39,7 +40,9 @@ agent-skills/
 │   │   └── SKILL.md
 │   ├── dxd-code-review/
 │   │   └── SKILL.md
-│   └── quick-fix-deploy-sync/
+│   ├── quick-fix-deploy-sync/
+│   │   └── SKILL.md
+│   └── har-derive-client/
 │       └── SKILL.md
 ├── rules/
 │   └── pstack-models.mdc   # global pstack model map (Cursor alwaysApply rule)
