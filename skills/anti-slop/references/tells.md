@@ -2,11 +2,11 @@
 
 ## Notes
 
-Load this when the SKILL.md catalog is not enough — for a thorough review, a contested edit, or when the author wants the reasoning behind a flag.
+Load this when the SKILL.md catalog is not enough: a thorough review, a contested edit, or the reasoning behind a flag.
 
 ## Overused AI lexicon
 
-Swap for plain words or cut. Not banned outright — flagged for scrutiny. If the plain word is worse, keep the original.
+Swap for plain words or cut. Not banned outright: flagged for scrutiny. If the plain word is worse, keep the original.
 
 | Flagged word | Usually means | Plainer choice |
 | --- | --- | --- |
@@ -29,6 +29,8 @@ Swap for plain words or cut. Not banned outright — flagged for scrutiny. If th
 | that being said | but, still | but |
 | a double-edged sword | (cliché) | name the specific tradeoff |
 | game-changer / revolutionary | (overclaim) | say the concrete change |
+| load-bearing | important, essential | the one that matters, or name the role |
+| linchpin / through-line / north star | the main point | the main point, or name it |
 
 ## Structural tells beyond word choice
 
@@ -39,7 +41,7 @@ Swap for plain words or cut. Not banned outright — flagged for scrutiny. If th
 - Symmetrical hedging: "On one hand… on the other hand…" when the author actually has a view.
 - Excessive signposting: "First… Second… Finally…" on short passages that do not need it.
 - Bold-everywhere emphasis: bolding so many phrases that none stands out.
-- Em-dash overuse: em-dashes as the default connector in sentence after sentence. Vary with commas, colons, periods, parentheses. (Some authors dislike em-dashes entirely — check preference.)
+- Em dash: never use `—` or `--` as punctuation. Replace with a comma, colon, period, or parentheses. This is a hard ban, not a preference. En dashes in numeric ranges (`2014–2016`) are fine.
 - Tidy false balance: presenting a "both sides" wrap-up on a question the piece already answered.
 
 ## The validation questions
