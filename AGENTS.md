@@ -177,3 +177,4 @@ Since skills are instructions, "error handling" means:
 | `dxd-code-review`           | Run a strict DXD maintainability and abstraction review  |
 | `quick-fix-deploy-sync`     | Fast-forward sync production and staging for hotfixes    |
 | `derive-client`              | Capture HAR from browser traffic and derive an HTTP/CLI client |
+| `anti-slop`                  | Remove AI writing tells from prose while keeping voice         |
