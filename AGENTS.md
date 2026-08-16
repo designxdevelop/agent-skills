@@ -151,7 +151,9 @@ Since skills are instructions, "error handling" means:
      `.local/githooks/` that re-links skills and rules when `skills/` or `rules/` changes
    - Or run manually anytime: `./scripts/sync-all-agent-config.sh`
    - Targets: `~/.agents/skills` (hub), `~/.cursor/skills`, `~/.claude/skills`,
-     `~/.codex/skills`, `~/.config/opencode/skills`, `~/.cursor/rules` (for `rules/*.mdc`)
+     `~/.codex/skills`, `~/.config/opencode/skills`, and T3 Code through a
+     `~/.config/agents/skills` directory symlink to the hub; `~/.cursor/rules`
+     receives `rules/*.mdc`
 10. Commit with message: `Add <skill-name> skill`
 
 ## Common Mistakes to Avoid

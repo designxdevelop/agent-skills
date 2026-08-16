@@ -7,6 +7,7 @@ SKILLS_DIR="$REPO_ROOT/skills"
 RULES_DIR="$REPO_ROOT/rules"
 CURSOR_RULES_DIR="$HOME/.cursor/rules"
 AGENTS_HUB="$HOME/.agents/skills"
+T3_SKILLS_DIR="$HOME/.config/agents/skills"
 QUIET=0
 
 if [[ "${1:-}" == "--quiet" ]]; then
@@ -19,12 +20,38 @@ log() {
   fi
 }
 
+link_skill() {
+  local source="$1"
+  local destination="$2"
+
+  if [[ -L "$destination" ]]; then
+    ln -sfn "$source" "$destination"
+  elif [[ -e "$destination" ]]; then
+    log "  skip $(basename "$destination") (standalone directory; not overwriting)"
+  else
+    ln -s "$source" "$destination"
+  fi
+}
+
 if [[ ! -d "$SKILLS_DIR" ]]; then
   log "No skills/ directory at $SKILLS_DIR; nothing to sync."
   exit 0
 fi
 
 mkdir -p "$AGENTS_HUB"
+
+# T3 Code reads ~/.config/agents/skills. Keep that entire directory as an alias
+# of the shared hub so it cannot drift from the other harnesses.
+if [[ -L "$T3_SKILLS_DIR" ]]; then
+  ln -sfn "$AGENTS_HUB" "$T3_SKILLS_DIR"
+elif [[ -e "$T3_SKILLS_DIR" ]]; then
+  log "T3 skills directory exists and is not a symlink: $T3_SKILLS_DIR"
+  log "Move it to a backup, then link it to $AGENTS_HUB before syncing."
+else
+  mkdir -p "$(dirname "$T3_SKILLS_DIR")"
+  ln -s "$AGENTS_HUB" "$T3_SKILLS_DIR"
+  log "Linked T3 Code skills -> ~/.agents/skills"
+fi
 
 # Spoke dirs symlink into the shared hub (relative paths from each spoke root).
 declare -a SPOKE_DIRS=(
@@ -48,13 +75,13 @@ for skill_path in "$SKILLS_DIR"/*/; do
   [[ -f "${skill_path}SKILL.md" ]] || continue
 
   name="$(basename "$skill_path")"
-  ln -sfn "$skill_path" "$AGENTS_HUB/$name"
+  link_skill "$skill_path" "$AGENTS_HUB/$name"
 
   for i in "${!SPOKE_DIRS[@]}"; do
     spoke_dir="${SPOKE_DIRS[$i]}"
     spoke_rel="${SPOKE_REL[$i]}"
     mkdir -p "$spoke_dir"
-    ln -sfn "${spoke_rel}/${name}" "${spoke_dir}/${name}"
+    link_skill "${spoke_rel}/${name}" "${spoke_dir}/${name}"
   done
 
   synced=$((synced + 1))

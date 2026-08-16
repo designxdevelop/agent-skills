@@ -1,17 +1,33 @@
 #!/usr/bin/env bash
-# Symlink pstack plugin skills into ~/.agents/skills and tool spokes.
+# Link or unlink pstack plugin skills in the shared hub and tool spokes.
+# The Cursor plugin itself is never touched.
 # Requires the pstack Cursor plugin (/add-plugin pstack) or PSTACK_SKILLS_DIR.
 set -euo pipefail
 
 QUIET=0
-if [[ "${1:-}" == "--quiet" ]]; then
-  QUIET=1
-fi
+UNLINK=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --quiet) QUIET=1 ;;
+    --unlink) UNLINK=1 ;;
+    *)
+      printf 'Unknown option: %s\n' "$arg" >&2
+      printf 'Usage: %s [--quiet] [--unlink]\n' "$(basename "$0")" >&2
+      exit 2
+      ;;
+  esac
+done
 
 log() {
   if [[ "$QUIET" -eq 0 ]]; then
     printf '%s\n' "$*"
   fi
+}
+
+is_pstack_target() {
+  local target="$1"
+  [[ "$target" == *"/.cursor/plugins/cache/cursor-public/pstack/"* ]]
 }
 
 resolve_pstack_skills_dir() {
@@ -44,6 +60,39 @@ declare -a SPOKE_REL=(
   "../../.agents/skills"
   "../../../.agents/skills"
 )
+
+unlink_pstack_links() {
+  local removed=0
+  local name dest target
+
+  mkdir -p "$AGENTS_HUB"
+
+  for dest in "$AGENTS_HUB"/*; do
+    [[ -L "$dest" ]] || continue
+    target="$(readlink "$dest")"
+    if is_pstack_target "$target"; then
+      name="$(basename "$dest")"
+      rm "$dest"
+      removed=$((removed + 1))
+      log "  unlinked hub/$name"
+
+      for spoke_dir in "${SPOKE_DIRS[@]}"; do
+        [[ -L "$spoke_dir/$name" ]] || continue
+        target="$(readlink "$spoke_dir/$name")"
+        if [[ "$target" == *"/.agents/skills/$name" ]]; then
+          rm "$spoke_dir/$name"
+        fi
+      done
+    fi
+  done
+
+  log "Unlinked $removed pstack skill(s) from the shared hub. Cursor plugin left in place."
+}
+
+if [[ "$UNLINK" -eq 1 ]]; then
+  unlink_pstack_links
+  exit 0
+fi
 
 if ! PSTACK_SKILLS="$(resolve_pstack_skills_dir)"; then
   log "pstack skills not found."

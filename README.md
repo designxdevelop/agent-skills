@@ -76,7 +76,7 @@ This repo is the source of truth for machine-wide agent configuration on Austin'
 
 | Path in repo  | Sync target                                                  | Purpose                                             |
 | ------------- | ------------------------------------------------------------ | --------------------------------------------------- |
-| `skills/*/`   | `~/.agents/skills/*` (+ Cursor/Claude/Codex/OpenCode spokes) | Custom DXD skills                                   |
+| `skills/*/`   | `~/.agents/skills/*` (+ Cursor/Claude/Codex/OpenCode spokes; T3 Code aliases the hub) | Custom DXD skills                                   |
 | `rules/*.mdc` | `~/.cursor/rules/*.mdc`                                      | Cursor always-applied rules (e.g. pstack model map) |
 
 Run a full sync anytime:
@@ -85,19 +85,43 @@ Run a full sync anytime:
 ./scripts/sync-all-agent-config.sh
 ```
 
+Audit the active roots without changing them:
+
+```bash
+./scripts/audit-agent-skills.sh
+```
+
 That runs:
 
 1. `./scripts/sync-agent-symlinks.sh` — custom skills + rules
-2. `./scripts/sync-pstack-skills.sh` — pstack plugin skills (if installed)
 
-### pstack (Cursor plugin + global models)
+Default sync unlinks any PStack copies from the shared hub so Codex, Claude,
+OpenCode, and T3 do not load the Cursor plugin catalog. The Cursor plugin stays
+installed and is the only place PStack should run.
 
-[pstack](https://github.com/cursor/plugins/tree/main/pstack) is a separate Cursor plugin, not vendored here. Setup:
+Add `--with-pstack` only if you intentionally want that catalog back in every
+harness:
+
+```bash
+./scripts/sync-all-agent-config.sh --with-pstack
+```
+
+T3 Code uses `~/.config/agents/skills`, which should be a directory symlink to
+`~/.agents/skills`. The sync script creates the alias when it is absent and
+refuses to overwrite a standalone directory; back up that directory first if
+you are consolidating an existing T3 installation.
+
+### pstack (Cursor plugin only)
+
+[pstack](https://github.com/cursor/plugins/tree/main/pstack) is a Cursor plugin,
+not a global skill pack. It works best inside Cursor. Do not copy it into the
+shared hub.
 
 1. In Cursor: `/add-plugin pstack` (user-level, once)
 2. Edit model roles in `rules/pstack-models.mdc`, then run `./scripts/sync-all-agent-config.sh`
-3. Use `/poteto-mode` (or `/interrogate`, `/how`, etc.) when you want rigorous agent workflows
+3. Use `/poteto-mode` (or `/interrogate`, `/how`, etc.) in Cursor
 
-The model rule is global via `~/.cursor/rules/pstack-models.mdc`. pstack skills are symlinked into the same hub as custom skills so Codex/Claude/OpenCode spokes see them too. The `poteto-agent` subagent still requires the Cursor plugin.
+The model rule syncs to `~/.cursor/rules/pstack-models.mdc` only. The
+`poteto-agent` subagent still requires the Cursor plugin.
 
 See [AGENTS.md](AGENTS.md) for the full file format specification and style guidelines.
