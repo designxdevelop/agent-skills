@@ -17,6 +17,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [derive-client](skills/derive-client/SKILL.md)                     | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
 | [anti-slop](skills/anti-slop/SKILL.md)                             | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
 | [ui-text-audit](skills/ui-text-audit/SKILL.md)                     | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                      |
+| [paper-design](skills/paper-design/SKILL.md)                       | Create and review native editable Paper designs through the direct Paper MCP                                                   |
 
 ## Skill Format
 
@@ -48,7 +49,9 @@ agent-skills/
 │   │   └── SKILL.md
 │   ├── anti-slop/
 │   │   └── SKILL.md
-│   └── ui-text-audit/
+│   ├── ui-text-audit/
+│   │   └── SKILL.md
+│   └── paper-design/
 │       └── SKILL.md
 ├── rules/
 │   └── pstack-models.mdc   # global pstack model map (Cursor alwaysApply rule)

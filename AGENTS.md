@@ -181,3 +181,4 @@ Since skills are instructions, "error handling" means:
 | `derive-client`              | Capture HAR from browser traffic and derive an HTTP/CLI client |
 | `anti-slop`                  | Remove AI writing tells from prose while keeping voice         |
 | `ui-text-audit`              | Audit screens for redundant UI text and remove what doesn't help the user |
+| `paper-design`               | Create and review native editable Paper designs through the direct MCP |
