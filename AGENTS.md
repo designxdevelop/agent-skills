@@ -180,3 +180,4 @@ Since skills are instructions, "error handling" means:
 | `quick-fix-deploy-sync`     | Fast-forward sync production and staging for hotfixes    |
 | `derive-client`              | Capture HAR from browser traffic and derive an HTTP/CLI client |
 | `anti-slop`                  | Remove AI writing tells from prose while keeping voice         |
+| `ui-text-audit`              | Audit screens for redundant UI text and remove what doesn't help the user |

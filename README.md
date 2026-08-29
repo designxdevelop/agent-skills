@@ -16,6 +16,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 | [derive-client](skills/derive-client/SKILL.md)                     | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
 | [anti-slop](skills/anti-slop/SKILL.md)                             | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
+| [ui-text-audit](skills/ui-text-audit/SKILL.md)                     | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                      |
 
 ## Skill Format
 
@@ -45,7 +46,9 @@ agent-skills/
 │   │   └── SKILL.md
 │   ├── derive-client/
 │   │   └── SKILL.md
-│   └── anti-slop/
+│   ├── anti-slop/
+│   │   └── SKILL.md
+│   └── ui-text-audit/
 │       └── SKILL.md
 ├── rules/
 │   └── pstack-models.mdc   # global pstack model map (Cursor alwaysApply rule)
