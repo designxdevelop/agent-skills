@@ -19,10 +19,10 @@ for arg in "$@"; do
   esac
 done
 
-"$REPO_ROOT/scripts/sync-agent-symlinks.sh" "${SYNC_ARGS[@]}"
+"$REPO_ROOT/scripts/sync-agent-symlinks.sh" ${SYNC_ARGS[@]+"${SYNC_ARGS[@]}"}
 
 if [[ "$WITH_PSTACK" -eq 1 ]]; then
-  "$REPO_ROOT/scripts/sync-pstack-skills.sh" "${SYNC_ARGS[@]}"
+  "$REPO_ROOT/scripts/sync-pstack-skills.sh" ${SYNC_ARGS[@]+"${SYNC_ARGS[@]}"}
 else
-  "$REPO_ROOT/scripts/sync-pstack-skills.sh" --unlink "${SYNC_ARGS[@]}"
+  "$REPO_ROOT/scripts/sync-pstack-skills.sh" --unlink ${SYNC_ARGS[@]+"${SYNC_ARGS[@]}"}
 fi

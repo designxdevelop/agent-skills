@@ -182,3 +182,4 @@ Since skills are instructions, "error handling" means:
 | `anti-slop`                  | Remove AI writing tells from prose while keeping voice         |
 | `ui-text-audit`              | Audit screens for redundant UI text and remove what doesn't help the user |
 | `paper-design`               | Create and review native editable Paper designs through the direct MCP |
+| `better-ai-design`           | Distinctive UI via exploration, critique, imagery, and subtraction |
