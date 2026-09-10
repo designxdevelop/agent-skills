@@ -19,6 +19,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [ui-text-audit](skills/ui-text-audit/SKILL.md)                     | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                      |
 | [paper-design](skills/paper-design/SKILL.md)                       | Create and review native editable Paper designs through the direct Paper MCP                                                   |
 | [better-ai-design](skills/better-ai-design/SKILL.md)               | Create distinctive interfaces via exploration, critique loops, imagery/motion, and deliberate subtraction                      |
+| [learn](skills/learn/SKILL.md) | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements |
 
 ## Skill Format
 
