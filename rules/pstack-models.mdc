@@ -2,30 +2,25 @@
 description: pstack per-role model choices (overrides skill defaults)
 alwaysApply: true
 ---
-
 # pstack model configuration. One line per role. Delete a line to fall back to the skill default.
-
 # `inherit-parent` or `auto` as a value: the role runs on the parent chat model (omit Task `model`). Alias entries in a panel list still count toward its fan-out.
-
-# Cost-conscious defaults: three-model panels instead of six-model fan-out.
-
-# Opus is reserved for architecture/design; all other Claude models are omitted.
-
-feature, refactoring: composer-2.5-fast
-bug-fix: gpt-5.6-sol-medium
-perf-issue: gpt-5.6-sol-medium
-hillclimb: gpt-5.6-sol-medium
-judgment and prose: gpt-5.6-sol-medium
-hardest tasks: gpt-5.6-sol-medium
-how explorer: cursor-grok-4.5-high-fast
-how explainer: gpt-5.6-sol-medium
-how critics: gpt-5.6-sol-medium, cursor-grok-4.5-high-fast, kimi-k3-high
-why investigators: cursor-grok-4.5-high-fast
-why synthesizer: gpt-5.6-sol-medium
-reflect tooling: cursor-grok-4.5-high-fast
-reflect judgment, divergent, synthesizer: gpt-5.6-sol-medium
-arena runners: gpt-5.6-sol-medium, cursor-grok-4.5-high-fast, kimi-k3-high
-arena cross-judge pool: kimi-k3-high, glm-5.2-high, cursor-grok-4.5-high-fast, gpt-5.6-sol-medium
-swarm workers: cursor-grok-4.5-high-fast
-architect runners: claude-opus-5-thinking-low
-interrogate reviewers: gpt-5.6-sol-medium, cursor-grok-4.5-high-fast, glm-5.2-high
+# budget: small–medium (medium ceiling)
+# Grok 4.7: never *-fast; only low/medium. Opus 5.5 low/medium for judgment.
+# Throughput: gemini-3.8-flash-* and muse-spark-1.3-* where cheap exploration fits (GLM/Kimi/DeepSeek not in catalog).
+feature, refactoring: grok-4.7-low
+bug-fix: grok-4.7-low
+perf-issue: grok-4.7-medium
+hillclimb: grok-4.7-medium
+judgment and prose: claude-opus-5-5-medium
+hardest tasks: claude-opus-5-5-medium
+how explorer: gemini-3.8-flash-medium
+how explainer: claude-opus-5-5-medium
+why investigators: gemini-3.8-flash-medium
+why synthesizer: claude-opus-5-5-medium
+reflect tooling: muse-spark-1.3-medium
+reflect judgment, divergent, synthesizer: claude-opus-5-5-medium
+arena runners: grok-4.7-low, grok-4.7-medium, claude-opus-5-5-low, gemini-3.8-flash-medium
+arena cross-judge pool: claude-opus-5-5-medium, grok-4.7-medium, claude-opus-5-5-low, muse-spark-1.3-medium
+swarm workers: gemini-3.8-flash-low
+architect runners: claude-opus-5-5-medium, grok-4.7-medium, gemini-3.8-flash-medium, claude-opus-5-5-low
+interrogate reviewers: claude-opus-5-5-medium, grok-4.7-medium, muse-spark-1.3-medium, gemini-3.8-flash-medium

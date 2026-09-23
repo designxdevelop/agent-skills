@@ -41,7 +41,9 @@ Swap for plain words or cut. Not banned outright: flagged for scrutiny. If the p
 - Symmetrical hedging: "On one hand… on the other hand…" when the author actually has a view.
 - Excessive signposting: "First… Second… Finally…" on short passages that do not need it.
 - Bold-everywhere emphasis: bolding so many phrases that none stands out.
-- Em dash: never use `—` or `--` as punctuation. Replace with a comma, colon, period, or parentheses. This is a hard ban, not a preference. En dashes in numeric ranges (`2014–2016`) are fine.
+- Em dash: check whether it clarifies the sentence or has become a default pause.
+  Keep deliberate use; replace a distracting instance with punctuation that
+  better fits the voice. En dashes in numeric ranges (`2014–2016`) are fine.
 - Tidy false balance: presenting a "both sides" wrap-up on a question the piece already answered.
 
 ## The validation questions
