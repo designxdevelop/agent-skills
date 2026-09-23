@@ -1,0 +1,31 @@
+{
+  "name": "dxd-skills",
+  "description": "DXD agent skills for Claude Code.",
+  "owner": {
+    "name": "Design x Develop"
+  },
+  "plugins": [
+    {
+      "name": "dxd-skills",
+      "description": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning.",
+      "author": {
+        "name": "Design x Develop"
+      },
+      "source": "./",
+      "repository": "https://github.com/designxdevelop/agent-skills",
+      "keywords": [
+        "dxd",
+        "agent-skills",
+        "code-review",
+        "ci",
+        "agent-readiness",
+        "writing",
+        "ui-text",
+        "design",
+        "paper",
+        "api-client",
+        "deploy"
+      ]
+    }
+  ]
+}

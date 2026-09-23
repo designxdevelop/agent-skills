@@ -1,6 +1,6 @@
 # Agent guidance
 
-This repository contains portable agent skills and Cursor rules.
+This repository contains portable agent skills, Cursor rules, and the `dxd-skills` plugin for Claude Code, Codex, and Cursor.
 
 ## Skill changes
 
@@ -13,12 +13,32 @@ This repository contains portable agent skills and Cursor rules.
 - Keep each instruction once. Use sections, checklists, and examples only when they add useful guidance; no fixed body template is required.
 - Preserve tool protocols, user preferences, and concrete failure boundaries. Avoid mandatory design rituals, vendor defaults, and generic repeated verification.
 - Put substantial mode-specific procedures in references and explain when to read them.
-- Validate changed YAML frontmatter, relative links, and Markdown whitespace. This documentation repository has no application build or test suite.
+- Validate changed relative links and Markdown whitespace. The packaging check below covers frontmatter names and README inventory; there is no application build or test suite.
+
+## Plugin packaging
+
+`skills/` is the canonical copy of every skill. The `dxd-skills` plugin ships it three ways: `.claude-plugin/`, `.cursor-plugin/`, and `plugins/dxd-skills/` (Codex, listed by `.agents/plugins/marketplace.json`). Never edit files under `plugins/dxd-skills/skills/`; they are generated relative symlinks.
+
+After adding, removing, or editing a skill, run:
+
+```bash
+python3 scripts/sync-plugin-packaging.py
+```
+
+It links every skill into the Codex plugin and bumps all three manifest versions together once per change: minor when a skill is added or removed, patch for edits. Pass `--version X.Y.Z` for an intentional major release.
+
+Before finishing any change under `skills/` or `plugins/`, run:
+
+```bash
+python3 scripts/sync-plugin-packaging.py --check
+```
+
+Done means the check passes: matching Claude, Codex, and Cursor versions, bumped above the last commit whenever skill content changed; one valid Codex symlink per skill; frontmatter `name` equal to the directory; and a README table row for every skill. Commit the manifest bumps and symlinks in the same commit as the skill change. CI runs the same check against the PR base.
 
 ## Rules and local installation
 
 - Cursor rules live in `rules/*.mdc`.
-- Run `./scripts/install-local-githooks.sh` once to install local links, or `./scripts/sync-all-agent-config.sh` to refresh them.
+- Run `./scripts/install-local-githooks.sh` once to install local links and a pre-commit packaging check, or `./scripts/sync-all-agent-config.sh` to refresh links.
 
 ## Git
 

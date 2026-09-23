@@ -8,58 +8,43 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 
 | Skill                                                                  | Description                                                                                                                   |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [agent-native-audit](skills/agent-native-audit/SKILL.md)               | Audit and score a codebase for cross-agent readiness across five dimensions                                                   |
+| [agent-native-audit](skills/agent-native-audit/SKILL.md)               | Assess agent readiness with repository evidence; use optional scores for comparisons                                          |
+| [anti-slop](skills/anti-slop/SKILL.md)                                 | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
+| [better-ai-design](skills/better-ai-design/SKILL.md)                   | Develop a strong visual direction for consequential interface work, with optional exploration and critique                    |
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md)                     | Set up a project-level verification command and matching CI workflow                                                          |
-| [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
-| [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
+| [derive-client](skills/derive-client/SKILL.md)                         | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
+| [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
+| [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
+| [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
+| [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
-| [derive-client](skills/derive-client/SKILL.md)                     | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
-| [anti-slop](skills/anti-slop/SKILL.md)                             | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
-| [ui-text-audit](skills/ui-text-audit/SKILL.md)                     | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                      |
-| [paper-design](skills/paper-design/SKILL.md)                       | Create and review native editable Paper designs through the direct Paper MCP                                                   |
-| [better-ai-design](skills/better-ai-design/SKILL.md)               | Create distinctive interfaces via exploration, critique loops, imagery/motion, and deliberate subtraction                      |
-| [learn](skills/learn/SKILL.md) | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements |
+| [ui-text-audit](skills/ui-text-audit/SKILL.md)                         | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                       |
 
 ## Skill Format
 
-Each skill lives in its own directory and contains a single `SKILL.md` with:
+Each skill lives in `skills/<name>/SKILL.md` with YAML `name` and `description`
+fields. The name matches the directory; the description identifies when to load it.
 
-1. **YAML frontmatter** — `name` (kebab-case, matches directory) and `description` (trigger phrases only, not workflow summary)
-2. **Goal** — What the skill achieves
-3. **When to Use** — Trigger conditions and example prompts
-4. **Workflow** — Numbered, actionable steps an agent follows
-5. **Guardrails** — Safety constraints and "never" rules
-6. **Completion Checklist** — Verifiable criteria for success
+The body contains only guidance that changes useful decisions: local conventions,
+non-obvious tool procedures, preferences, and concrete acceptance criteria. Choose
+headings and checklists to fit the task rather than repeating a fixed template.
+Keep substantial conditional procedures in linked references and state when to
+read them. Preserve real safety constraints without repeating generic policy in
+every skill.
 
 ```
 agent-skills/
-├── skills/
-│   ├── agent-native-audit/
-│   │   └── SKILL.md
-│   ├── ci-verify-setup/
-│   │   └── SKILL.md
-│   ├── i-have-adhd/
-│   │   └── SKILL.md
-│   ├── live-work-context-cleanup/
-│   │   └── SKILL.md
-│   ├── dxd-code-review/
-│   │   └── SKILL.md
-│   ├── quick-fix-deploy-sync/
-│   │   └── SKILL.md
-│   ├── derive-client/
-│   │   └── SKILL.md
-│   ├── anti-slop/
-│   │   └── SKILL.md
-│   ├── ui-text-audit/
-│   │   └── SKILL.md
-│   ├── paper-design/
-│   │   └── SKILL.md
-│   └── better-ai-design/
-│       └── SKILL.md
-├── rules/
-│   └── pstack-models.mdc   # global pstack model map (Cursor alwaysApply rule)
+├── skills/<name>/SKILL.md          # canonical skills
+├── plugins/dxd-skills/
+│   ├── .codex-plugin/plugin.json   # Codex manifest
+│   └── skills/<name> -> ../../../skills/<name>   # generated symlinks
+├── .claude-plugin/                 # Claude Code plugin + marketplace
+├── .cursor-plugin/                 # Cursor plugin + marketplace
+├── .agents/plugins/marketplace.json  # Codex marketplace
+├── rules/pstack-models.mdc         # Cursor alwaysApply rule
 ├── scripts/
+│   ├── sync-plugin-packaging.py    # plugin symlinks + version bumps
 │   ├── sync-agent-symlinks.sh
 │   ├── sync-pstack-skills.sh
 │   └── sync-all-agent-config.sh
@@ -69,16 +54,30 @@ agent-skills/
 
 ## Adding a Skill
 
-1. Create a directory: `mkdir -p skills/<skill-name>` (kebab-case)
-2. Add `skills/<skill-name>/SKILL.md` with the required frontmatter and sections
-3. Ensure the frontmatter `name` matches the directory name
-4. Include `## Guardrails` and `## Completion Checklist` — both are required
-5. **Update `README.md`** — add the new skill to the "Available Skills" table above
-6. **Update `AGENTS.md`** — add the new skill to the "Existing Skills Reference" table
-7. **Sync agent symlinks** — run `./scripts/install-local-githooks.sh` once per clone
-   (post-commit hook is gitignored; it re-links skills and rules after commits that touch
-   `skills/` or `rules/`)
-8. Commit: `Add <skill-name> skill`
+1. Check the current inventory for overlap, then create `skills/<skill-name>/SKILL.md`.
+2. Add precise YAML routing metadata and the task-specific instructions it needs.
+3. Validate frontmatter, relative links, and Markdown whitespace.
+4. Update the Available Skills table when adding, removing, or changing a skill's scope.
+5. Run `python3 scripts/sync-plugin-packaging.py` to link the skill into the Codex
+   plugin and bump all plugin manifest versions, then confirm with `--check`.
+6. Run `./scripts/sync-agent-symlinks.sh` to refresh custom skill links, or install the
+   local hooks once with `./scripts/install-local-githooks.sh`.
+7. Commit the skill and the manifest bumps together, with an imperative message such
+   as `Add <skill-name> skill`.
+
+## Plugin
+
+The same skills ship as the `dxd-skills` plugin for teammates and other machines.
+Skills load namespaced, for example `dxd-skills:anti-slop`.
+
+| Tool        | Marketplace file                   | Install                                                                                             |
+| ----------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Claude Code | `.claude-plugin/marketplace.json`  | `/plugin marketplace add designxdevelop/agent-skills`, then `/plugin install dxd-skills@dxd-skills` |
+| Codex       | `.agents/plugins/marketplace.json` | Add this repo as a plugin marketplace, then install `dxd-skills`                                    |
+| Cursor      | `.cursor-plugin/marketplace.json`  | Add this repo as a plugin marketplace, then install `dxd-skills`                                    |
+
+On a machine that already runs `sync-all-agent-config.sh`, the global symlinks load the
+same skills, so installing the plugin as well gives duplicate entries.
 
 ## Global Agent Config
 
