@@ -1,0 +1,28 @@
+name: Plugin packaging
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify plugin packaging
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if [[ -n "$BASE_SHA" && ! "$BASE_SHA" =~ ^0+$ ]]; then
+            python3 scripts/sync-plugin-packaging.py --check --base "$BASE_SHA"
+          else
+            python3 scripts/sync-plugin-packaging.py --check
+          fi

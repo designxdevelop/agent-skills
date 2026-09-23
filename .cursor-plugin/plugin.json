@@ -1,0 +1,23 @@
+{
+  "name": "dxd-skills",
+  "displayName": "DXD Skills",
+  "description": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Design x Develop"
+  },
+  "repository": "https://github.com/designxdevelop/agent-skills",
+  "keywords": [
+    "dxd",
+    "agent-skills",
+    "code-review",
+    "ci",
+    "agent-readiness",
+    "writing",
+    "ui-text",
+    "design",
+    "paper",
+    "api-client",
+    "deploy"
+  ]
+}
