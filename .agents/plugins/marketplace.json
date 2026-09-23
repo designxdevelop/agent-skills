@@ -8,7 +8,7 @@
       "name": "dxd-skills",
       "source": {
         "source": "local",
-        "path": "./"
+        "path": "./plugins/dxd-skills"
       },
       "policy": {
         "installation": "AVAILABLE",
