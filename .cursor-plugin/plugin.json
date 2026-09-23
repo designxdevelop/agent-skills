@@ -19,5 +19,8 @@
     "paper",
     "api-client",
     "deploy"
-  ]
+  ],
+  "homepage": "https://github.com/designxdevelop/agent-skills",
+  "category": "developer-tools",
+  "skills": "./skills/"
 }
