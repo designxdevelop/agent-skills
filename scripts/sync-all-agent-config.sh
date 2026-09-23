@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Sync agent-skills (skills + rules). PStack is opt-in because its large plugin
+# Sync agent-skills skills. PStack is opt-in because its large plugin
 # catalog otherwise becomes visible in every harness through the shared hub.
 set -euo pipefail
 

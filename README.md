@@ -36,15 +36,12 @@ every skill.
 ```
 agent-skills/
 ├── skills/<name>/SKILL.md          # canonical skills
-├── plugins/dxd-skills/
-│   ├── .codex-plugin/plugin.json   # Codex manifest
-│   └── skills/<name> -> ../../../skills/<name>   # generated symlinks
 ├── .claude-plugin/                 # Claude Code plugin + marketplace
+├── .codex-plugin/plugin.json       # Codex plugin
 ├── .cursor-plugin/                 # Cursor plugin + marketplace
 ├── .agents/plugins/marketplace.json  # Codex marketplace
-├── rules/pstack-models.mdc         # Cursor alwaysApply rule
 ├── scripts/
-│   ├── sync-plugin-packaging.py    # plugin symlinks + version bumps
+│   ├── sync-plugin-packaging.py    # aligned plugin version bumps
 │   ├── sync-agent-symlinks.sh
 │   ├── sync-pstack-skills.sh
 │   └── sync-all-agent-config.sh
@@ -58,8 +55,8 @@ agent-skills/
 2. Add precise YAML routing metadata and the task-specific instructions it needs.
 3. Validate frontmatter, relative links, and Markdown whitespace.
 4. Update the Available Skills table when adding, removing, or changing a skill's scope.
-5. Run `python3 scripts/sync-plugin-packaging.py` to link the skill into the Codex
-   plugin and bump all plugin manifest versions, then confirm with `--check`.
+5. Run `python3 scripts/sync-plugin-packaging.py` to bump all plugin manifest
+   versions, then confirm with `--check`.
 6. Run `./scripts/sync-agent-symlinks.sh` to refresh custom skill links, or install the
    local hooks once with `./scripts/install-local-githooks.sh`.
 7. Commit the skill and the manifest bumps together, with an imperative message such
@@ -86,7 +83,6 @@ This repo is the source of truth for machine-wide agent configuration on Austin'
 | Path in repo  | Sync target                                                  | Purpose                                             |
 | ------------- | ------------------------------------------------------------ | --------------------------------------------------- |
 | `skills/*/`   | `~/.agents/skills/*` (+ Cursor/Claude/Codex/OpenCode spokes; T3 Code aliases the hub) | Custom DXD skills                                   |
-| `rules/*.mdc` | `~/.cursor/rules/*.mdc`                                      | Cursor always-applied rules (e.g. pstack model map) |
 
 Run a full sync anytime:
 
@@ -102,7 +98,7 @@ Audit the active roots without changing them:
 
 That runs:
 
-1. `./scripts/sync-agent-symlinks.sh` — custom skills + rules
+1. `./scripts/sync-agent-symlinks.sh` — custom skills
 
 Default sync unlinks any PStack copies from the shared hub so Codex, Claude,
 OpenCode, and T3 do not load the Cursor plugin catalog. The Cursor plugin stays
@@ -127,10 +123,9 @@ not a global skill pack. It works best inside Cursor. Do not copy it into the
 shared hub.
 
 1. In Cursor: `/add-plugin pstack` (user-level, once)
-2. Edit model roles in `rules/pstack-models.mdc`, then run `./scripts/sync-all-agent-config.sh`
+2. Edit model roles in `~/.cursor/rules/pstack-models.mdc`
 3. Use `/poteto-mode` (or `/interrogate`, `/how`, etc.) in Cursor
 
-The model rule syncs to `~/.cursor/rules/pstack-models.mdc` only. The
-`poteto-agent` subagent still requires the Cursor plugin.
+The `poteto-agent` subagent still requires the Cursor plugin.
 
 See [AGENTS.md](AGENTS.md) for the full file format specification and style guidelines.

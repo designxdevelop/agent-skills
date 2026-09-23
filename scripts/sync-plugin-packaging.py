@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Keep the Claude, Codex, and Cursor dxd-skills plugins aligned with skills/.
 
-Sync mode (default) links every canonical skill into the Codex plugin and bumps
-all three manifest versions together: a patch bump when skill content changes,
-a minor bump when a skill is added or removed. --check validates without writing.
+All three manifests sit at the repository root and load skills/ directly. Sync
+mode (default) bumps their versions together: a patch bump when skill content
+changes, a minor bump when a skill is added or removed. --check validates
+without writing.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import subprocess
 import sys
@@ -18,17 +18,15 @@ from pathlib import Path
 from typing import Tuple
 
 
-PLUGIN = "dxd-skills"
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = ROOT / "skills"
 README = ROOT / "README.md"
-CODEX_SKILLS_DIR = ROOT / "plugins" / PLUGIN / "skills"
 MANIFESTS = (
     ROOT / ".claude-plugin" / "plugin.json",
     ROOT / ".cursor-plugin" / "plugin.json",
-    ROOT / "plugins" / PLUGIN / ".codex-plugin" / "plugin.json",
+    ROOT / ".codex-plugin" / "plugin.json",
 )
-CONTENT_PATHS = ("skills", f"plugins/{PLUGIN}/skills")
+CONTENT_PATHS = ("skills",)
 VERSION_RE = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
 VERSION_FIELD_RE = re.compile(r'("version"\s*:\s*")([^"]+)(")', re.MULTILINE)
 SKILL_PATH_RE = re.compile(r"^skills/([^/]+)/SKILL\.md$")
@@ -104,61 +102,6 @@ def skills_at(revision: str) -> set[str] | None:
     }
 
 
-def expected_link_target(name: str) -> str:
-    return os.path.relpath(SKILLS_DIR / name, CODEX_SKILLS_DIR)
-
-
-def link_issues() -> list[str]:
-    expected = set(canonical_skills())
-    issues: list[str] = []
-
-    for name in sorted(expected):
-        link = CODEX_SKILLS_DIR / name
-        target = expected_link_target(name)
-        if not link.is_symlink():
-            issues.append(f"missing symlink: {link.relative_to(ROOT)} -> {target}")
-        elif os.readlink(link) != target:
-            issues.append(
-                f"wrong symlink: {link.relative_to(ROOT)} -> {os.readlink(link)}; expected {target}"
-            )
-
-    if CODEX_SKILLS_DIR.is_dir():
-        for entry in sorted(CODEX_SKILLS_DIR.iterdir()):
-            if entry.name not in expected:
-                kind = "stale symlink" if entry.is_symlink() else "unexpected entry"
-                issues.append(f"{kind}: {entry.relative_to(ROOT)}")
-
-    return issues
-
-
-def sync_links() -> list[str]:
-    expected = set(canonical_skills())
-    changes: list[str] = []
-    CODEX_SKILLS_DIR.mkdir(parents=True, exist_ok=True)
-
-    for entry in sorted(CODEX_SKILLS_DIR.iterdir()):
-        if entry.name in expected:
-            continue
-        if not entry.is_symlink():
-            raise RuntimeError(f"refusing to remove non-symlink {entry.relative_to(ROOT)}")
-        entry.unlink()
-        changes.append(f"removed stale link {entry.relative_to(ROOT)}")
-
-    for name in sorted(expected):
-        link = CODEX_SKILLS_DIR / name
-        target = expected_link_target(name)
-        if link.is_symlink() and os.readlink(link) == target:
-            continue
-        if link.exists() and not link.is_symlink():
-            raise RuntimeError(f"refusing to replace non-symlink {link.relative_to(ROOT)}")
-        if link.is_symlink():
-            link.unlink()
-        link.symlink_to(target)
-        changes.append(f"linked {link.relative_to(ROOT)} -> {target}")
-
-    return changes
-
-
 def frontmatter_issues() -> list[str]:
     issues: list[str] = []
     for name in canonical_skills():
@@ -223,7 +166,7 @@ def required_version(base: str | None) -> Version | None:
 
 
 def validate(base: str | None) -> list[str]:
-    issues = link_issues() + frontmatter_issues() + readme_issues()
+    issues = frontmatter_issues() + readme_issues()
     current = [manifest_version(path) for path in MANIFESTS]
     if len(set(current)) != 1:
         rendered = ", ".join(format_version(version) for version in current)
@@ -239,7 +182,7 @@ def validate(base: str | None) -> list[str]:
 
 def synchronize(target_version: str | None) -> list[str]:
     current = max(manifest_version(path) for path in MANIFESTS)
-    changes = sync_links()
+    changes: list[str] = []
     required = required_version(None)
 
     if target_version:

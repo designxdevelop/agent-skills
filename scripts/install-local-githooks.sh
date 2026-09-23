@@ -16,7 +16,7 @@ cat > "$PRE_COMMIT" << 'EOF'
 # Local pre-commit hook (gitignored). Blocks skill commits with stale plugin packaging.
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 
-if git diff --cached --name-only | grep -qE '^(skills/|plugins/|README\.md)'; then
+if git diff --cached --name-only | grep -qE '^(skills/|\.(claude|codex|cursor)-plugin/|README\.md)'; then
   python3 "$ROOT/scripts/sync-plugin-packaging.py" --check || {
     echo "Run: python3 scripts/sync-plugin-packaging.py, then stage the manifest updates." >&2
     exit 1
@@ -29,7 +29,7 @@ cat > "$POST_COMMIT" << 'EOF'
 # Local post-commit hook (gitignored). Syncs skill symlinks when skills/ changes.
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 
-if git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -qE '^(skills/|rules/)'; then
+if git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | grep -qE '^skills/'; then
   "$ROOT/scripts/sync-all-agent-config.sh" --quiet || true
 fi
 EOF
