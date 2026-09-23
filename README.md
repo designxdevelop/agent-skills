@@ -36,15 +36,13 @@ every skill.
 ```
 agent-skills/
 ├── skills/<name>/SKILL.md          # canonical skills
-├── plugins/dxd-skills/
-│   ├── .codex-plugin/plugin.json   # Codex manifest
-│   └── skills/<name> -> ../../../skills/<name>   # generated symlinks
 ├── .claude-plugin/                 # Claude Code plugin + marketplace
+├── .codex-plugin/plugin.json       # Codex plugin
 ├── .cursor-plugin/                 # Cursor plugin + marketplace
 ├── .agents/plugins/marketplace.json  # Codex marketplace
 ├── rules/pstack-models.mdc         # Cursor alwaysApply rule
 ├── scripts/
-│   ├── sync-plugin-packaging.py    # plugin symlinks + version bumps
+│   ├── sync-plugin-packaging.py    # aligned plugin version bumps
 │   ├── sync-agent-symlinks.sh
 │   ├── sync-pstack-skills.sh
 │   └── sync-all-agent-config.sh
@@ -58,8 +56,8 @@ agent-skills/
 2. Add precise YAML routing metadata and the task-specific instructions it needs.
 3. Validate frontmatter, relative links, and Markdown whitespace.
 4. Update the Available Skills table when adding, removing, or changing a skill's scope.
-5. Run `python3 scripts/sync-plugin-packaging.py` to link the skill into the Codex
-   plugin and bump all plugin manifest versions, then confirm with `--check`.
+5. Run `python3 scripts/sync-plugin-packaging.py` to bump all plugin manifest
+   versions, then confirm with `--check`.
 6. Run `./scripts/sync-agent-symlinks.sh` to refresh custom skill links, or install the
    local hooks once with `./scripts/install-local-githooks.sh`.
 7. Commit the skill and the manifest bumps together, with an imperative message such

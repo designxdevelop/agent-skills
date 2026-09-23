@@ -16,7 +16,7 @@ cat > "$PRE_COMMIT" << 'EOF'
 # Local pre-commit hook (gitignored). Blocks skill commits with stale plugin packaging.
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
 
-if git diff --cached --name-only | grep -qE '^(skills/|plugins/|README\.md)'; then
+if git diff --cached --name-only | grep -qE '^(skills/|\.(claude|codex|cursor)-plugin/|README\.md)'; then
   python3 "$ROOT/scripts/sync-plugin-packaging.py" --check || {
     echo "Run: python3 scripts/sync-plugin-packaging.py, then stage the manifest updates." >&2
     exit 1
