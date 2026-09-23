@@ -12,6 +12,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [anti-slop](skills/anti-slop/SKILL.md)                                 | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
 | [better-ai-design](skills/better-ai-design/SKILL.md)                   | Develop a strong visual direction for consequential interface work, with optional exploration and critique                    |
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md)                     | Set up a project-level verification command and matching CI workflow                                                          |
+| [company-profile](skills/company-profile/SKILL.md)                     | Create a reusable company fact sheet and ready-to-use descriptions, bios, and page copy                                        |
 | [derive-client](skills/derive-client/SKILL.md)                         | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
