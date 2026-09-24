@@ -1,0 +1,3 @@
+interface:
+  display_name: "Edit AI-Sounding Prose"
+  short_description: "Remove formulaic writing while preserving voice"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Improve Agent Skills"
+  short_description: "Find recurring issues in agent sessions"

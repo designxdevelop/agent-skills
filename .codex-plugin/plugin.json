@@ -1,7 +1,7 @@
 {
   "name": "dxd-skills",
-  "version": "0.2.1",
-  "description": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning.",
+  "version": "0.4.1",
+  "description": "Practical DXD skills for code quality, design, writing, CI, testing, deployment, and resuming work.",
   "author": {
     "name": "Design x Develop",
     "url": "https://designxdevelop.com"
@@ -24,8 +24,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "DXD Skills",
-    "shortDescription": "Reusable DXD workflows for coding agents.",
-    "longDescription": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning.",
+    "shortDescription": "Practical skills for agents",
+    "longDescription": "Practical DXD skills for code quality, design, writing, CI, testing, deployment, and resuming work.",
     "developerName": "Design x Develop",
     "category": "Productivity",
     "capabilities": [
@@ -33,9 +33,10 @@
       "Write"
     ],
     "websiteURL": "https://designxdevelop.com",
+    "logo": "./assets/dxd-plugin-logo.svg",
+    "composerIcon": "./assets/dxd-composer-icon.svg",
     "defaultPrompt": [
       "Audit this repository for agent readiness.",
-      "Set up a single verification command and matching CI.",
       "Run a DXD code review on this branch.",
       "Remove AI-writing tells from this draft."
     ]

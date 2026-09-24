@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <title>DXD Skills composer icon</title>
+  <defs>
+    <linearGradient id="brand" x1="100" y1="40" x2="180" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="48%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#e879a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="48" fill="#06080f"/>
+  <rect x="12" y="12" width="232" height="232" rx="38" fill="#12151a" stroke="#2a2e39" stroke-width="2"/>
+  <g transform="translate(44 52) scale(2.1) translate(-100 -4)">
+    <path d="M100 4 H116 L140 33 L164 4 H180 L150 42 L180 76 H164 L140 49 L116 76 H100 L130 42 Z" fill="url(#brand)"/>
+  </g>
+  <circle cx="30" cy="30" r="5" fill="#86cfa2"/>
+</svg>

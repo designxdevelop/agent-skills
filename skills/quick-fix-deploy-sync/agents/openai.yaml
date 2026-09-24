@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sync Deploy Branches"
+  short_description: "Fast-forward production and staging branches"

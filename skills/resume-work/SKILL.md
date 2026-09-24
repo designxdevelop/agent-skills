@@ -1,12 +1,13 @@
 ---
-name: live-work-context-cleanup
+name: resume-work
 description: >-
-  Recover and continue ambiguous work that spans live pages, browser or SaaS
-  state, local files, releases, or automations. Use when the user asks to find
-  the real current state, clean up low-risk noise, or verify a change is live.
+  Find the current state of work across live pages, apps, local files, releases,
+  or automations, then continue the requested task. Use when the user asks to
+  pick up where they left off, resolve an ambiguous handoff, clean up low-risk
+  noise, or verify that a change is live.
 ---
 
-# Live Work Context Cleanup
+# Resume Work
 
 ## Goal
 

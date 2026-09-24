@@ -1,11 +1,9 @@
 ---
 name: ui-text-audit
 description: >-
-  Audit every user-facing screen for redundant, verbose, or unnecessary UI text
-  and remove what doesn't help the user decide or act. Triggers on "audit UI
-  text", "trim copy", "remove redundant labels", "verbose UI", "too many words",
-  "clean up screen text", "UI text review", "cut unnecessary copy", or any
-  request to tighten interface language across a project.
+  Audit interface copy across a project and remove text that does not help
+  users decide or act. Use when screens feel wordy or the user asks to trim
+  redundant labels, descriptions, or other UI text.
 ---
 
 # UI Text Audit

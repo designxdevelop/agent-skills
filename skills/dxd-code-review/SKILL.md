@@ -1,7 +1,9 @@
 ---
 name: dxd-code-review
 description: >-
-  Use when the user asks for DXD code review, dxd-code-review, harsh maintainability review, deep code quality audit, abstraction review, giant-file review, spaghetti-code review, or structural critique of current branch changes.
+  Review branch changes with a strict focus on maintainability, abstraction
+  boundaries, file size, and branching complexity. Use when the user requests
+  a DXD code review or an unusually deep structural critique.
 disable-model-invocation: true
 ---
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Derive an API Client"
+  short_description: "Build an HTTP client from observed browser traffic"

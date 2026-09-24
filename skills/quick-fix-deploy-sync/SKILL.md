@@ -1,10 +1,9 @@
 ---
 name: quick-fix-deploy-sync
 description: >-
-  Sync production and staging git branches with fast-forward merges and push.
-  Use when the user wants a quick fix deploy, hotfix promotion, backport to
-  staging, sync main and dev/staging, fast-forward branches, or keep staging
-  and production in sync after a commit.
+  Sync production and staging Git branches with fast-forward merges and push.
+  Use for hotfix promotion, backports to staging, or keeping release branches
+  aligned after a commit.
 ---
 
 # Quick Fix Deploy Sync

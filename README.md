@@ -1,6 +1,6 @@
 # agent-skills
 
-Reusable skill definitions for AI coding agents. Each skill is a structured Markdown file that gives an agent the instructions, workflow, and guardrails it needs to perform a specific task — setting up CI, auditing a codebase, cleaning up live work context, and so on.
+Reusable skill definitions for AI coding agents. Each skill is a structured Markdown file that gives an agent the instructions, workflow, and guardrails it needs to perform a specific task — setting up CI, auditing a codebase, resuming work across tools, and so on.
 
 Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, and other agent routers. The YAML frontmatter in each file provides the trigger metadata agents use to decide when to load the skill.
 
@@ -17,9 +17,10 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
 | [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
-| [live-work-context-cleanup](skills/live-work-context-cleanup/SKILL.md) | Recover the correct live work context and perform conservative cleanup across browser-first tools, SaaS apps, and local repos |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
+| [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |
+| [test-audit](skills/test-audit/SKILL.md)                               | Evaluate test value and audit suites for duplicate coverage, implementation coupling, and test-only seams                    |
 | [ui-text-audit](skills/ui-text-audit/SKILL.md)                         | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                       |
 
 ## Skill Format
@@ -39,10 +40,12 @@ agent-skills/
 ├── skills/<name>/SKILL.md          # canonical skills
 ├── .claude-plugin/                 # Claude Code plugin + marketplace
 ├── .codex-plugin/plugin.json       # Codex plugin
+├── assets/                         # public plugin logo and composer icon
 ├── .cursor-plugin/                 # Cursor plugin + marketplace
 ├── .agents/plugins/marketplace.json  # Codex marketplace
 ├── scripts/
 │   ├── sync-plugin-packaging.py    # aligned plugin version bumps
+│   ├── build-openai-submission.py  # public skills-only ZIP
 │   ├── sync-agent-symlinks.sh
 │   ├── sync-pstack-skills.sh
 │   └── sync-all-agent-config.sh
@@ -76,6 +79,14 @@ Skills load namespaced, for example `dxd-skills:anti-slop`.
 
 On a machine that already runs `sync-all-agent-config.sh`, the global symlinks load the
 same skills, so installing the plugin as well gives duplicate entries.
+
+### Public OpenAI submission
+
+Run `python3 scripts/build-openai-submission.py` from the repository root. It checks
+the plugin packaging, then creates `dist/dxd-skills-<version>-openai-submission.zip`
+with the Codex plugin manifest, canonical skills, and branding assets. Upload that ZIP through
+the OpenAI Platform's **Skills only** plugin submission flow. The `dist/` folder is
+ignored by Git; build a fresh ZIP after each version bump.
 
 ## Global Agent Config
 

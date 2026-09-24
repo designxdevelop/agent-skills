@@ -1,11 +1,9 @@
 ---
 name: derive-client
 description: >-
-  Use when the user wants a CLI or API client for a website that lacks a public
-  SDK, asks to record browser network traffic into a HAR, reverse-engineer an
-  undocumented API from DevTools/HAR, replace repeated browser automation with
-  direct HTTP calls, or build a quick site-specific tool the way agents capture
-  a flow once then derive a client.
+  Derive a small HTTP client or CLI from browser network traffic. Use when a
+  website lacks a suitable API client, or the user asks to capture a HAR and
+  turn an observed browser flow into reusable direct requests.
 ---
 
 # Derive Client

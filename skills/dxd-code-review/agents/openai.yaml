@@ -1,0 +1,3 @@
+interface:
+  display_name: "DXD Code Review"
+  short_description: "Review code structure with a strict quality bar"

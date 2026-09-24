@@ -1,0 +1,3 @@
+interface:
+  display_name: "Set Up Project Verification"
+  short_description: "Unify local checks and CI under one command"

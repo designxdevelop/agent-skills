@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <title>DXD Skills logo</title>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="40" x2="300" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="45%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#e879a8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="64" fill="#06080f"/>
+  <rect x="28" y="28" width="456" height="456" rx="28" fill="#12151a" stroke="#2a2e39" stroke-width="2"/>
+  <path d="M56 28h400a28 28 0 0 1 28 28v48H28V56a28 28 0 0 1 28-28Z" fill="#1b1e25"/>
+  <path d="M29 104h454" stroke="#2a2e39" stroke-width="2"/>
+  <circle cx="62" cy="66" r="7" fill="#e879a8"/>
+  <circle cx="86" cy="66" r="7" fill="#d7bd75"/>
+  <circle cx="110" cy="66" r="7" fill="#86cfa2"/>
+  <svg x="56" y="194" width="400" height="107" viewBox="0 0 300 80" overflow="visible">
+    <path d="M4 4 H44 C72 4 92 18 92 40 C92 62 72 76 44 76 H4 Z M16 15 V65 H44 C65 65 80 55 80 40 C80 25 65 15 44 15 Z" fill="url(#brand)" fill-rule="evenodd"/>
+    <path d="M100 4 H116 L140 33 L164 4 H180 L150 42 L180 76 H164 L140 49 L116 76 H100 L130 42 Z" fill="url(#brand)"/>
+    <path d="M192 4 H232 C260 4 280 18 280 40 C280 62 260 76 232 76 H192 Z M204 15 V65 H232 C253 65 268 55 268 40 C268 25 253 15 232 15 Z" fill="url(#brand)" fill-rule="evenodd"/>
+  </svg>
+  <path d="M104 373h304" stroke="#2a2e39" stroke-width="2"/>
+  <circle cx="256" cy="406" r="4" fill="#86cfa2"/>
+</svg>

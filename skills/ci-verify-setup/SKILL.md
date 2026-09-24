@@ -1,7 +1,9 @@
 ---
 name: ci-verify-setup
 description: >-
-  Use when a project lacks a single reliable verification command, has missing or broken CI, asks to add GitHub Actions, asks to make agents able to verify their work, or needs lint/type/test checks standardized across local and remote environments.
+  Set up one reliable project verification command and run it in CI. Use when
+  local checks are scattered or missing, CI is absent or broken, or agents
+  cannot consistently verify their changes.
 ---
 
 # CI Verify Setup

@@ -1,0 +1,3 @@
+interface:
+  display_name: "UI Text Audit"
+  short_description: "Trim interface text that does not help users"
