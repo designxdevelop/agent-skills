@@ -1,84 +1,104 @@
 ---
 name: test-audit
 description: >-
-  Evaluate proposed or existing tests for meaningful regression protection, duplication,
-  implementation coupling, and test-only production seams. Use when writing substantive
-  tests or when asked to review, simplify, or prune a test suite.
+  Simplify test suites around focused end-to-end journeys and API/database contracts,
+  pruning redundant unit and component tests. Use when writing substantive tests or
+  reviewing, simplifying, or pruning an existing suite.
 ---
 
 # Test Audit
 
-Improve confidence per test maintained. Apply the value check when adding or changing
-tests; use the audit workflow for an existing suite. Keep the scope tied to the
-user's task rather than expanding an ordinary edit into a repository-wide sweep.
+Prefer a small suite of focused E2Es that proves the product works. Optimize for
+confidence and maintenance burden across the whole suite, not the number of
+individually defensible tests. Fast execution alone does not justify keeping a test.
+Keep the scope tied to the user's task; an ordinary edit is not a repository-wide audit.
 
-## Value check for a proposed test
+## Choose the strongest useful boundary
 
-Before adding a test, identify:
+- **Focused E2Es are the default for user-visible behavior:** critical journeys,
+  navigation, forms, approval flows, and downloads. Each test should have one clear
+  outcome and exercise the real application through that outcome. Avoid giant
+  all-purpose journeys and repeating the same setup-heavy flow for every variation.
+- **API/database integration tests own server contracts:** authorization, persistence,
+  accounting, idempotency, and failure recovery. Use real local storage where practical;
+  mocking away the behavior under test does not establish that contract.
+- **Unit tests are selective exceptions:** complex parsing, algorithms, evidence rules,
+  serialization, or consequential edge cases that are difficult to exercise reliably
+  at a stronger boundary. Require a concrete reason for testing them in isolation.
+- **Simple component and helper tests are first candidates for removal:** rendering,
+  labels, ordinary callbacks, navigation wiring, trivial transformations, and private
+  call shapes rarely need separate tests when a focused journey already covers them.
 
-- The observable behavior, invariant, or independent contract it protects.
-- A credible regression that would make it fail for the intended reason.
-- Why existing tests do not already cover that regression at a stronger boundary.
-- Whether it requires an export, flag, injection hook, wrapper, or other production
-  seam that no production caller needs.
+Do not recreate every deleted unit case as an E2E. Choose representative journeys
+and place consequential edge cases at the cheapest boundary that proves the real
+contract. Multiple test layers must earn their maintenance cost with distinct,
+material regression protection; merely exercising a different layer is insufficient.
+External service stubs can make E2Es deterministic, but identify what they leave
+unproven. Never mock the application behavior the test claims to verify.
 
-If those answers are unclear, revise the test or omit it. Prefer extending a
-parameterized case or an existing owner suite over repeating the same scenario at
-another layer. For a bug regression, demonstrate a pre-fix failure for the
-intended reason when practical, then verify it passes after the fix.
+## Value check before adding or retaining a test
+
+Identify:
+
+- The observable outcome and a credible regression the test detects.
+- Why a focused E2E or API/database test does not already provide sufficient proof.
+- For a unit/component test, why isolated coverage materially improves confidence.
+- The setup, mocks, fixtures, and production seams the test requires us to maintain.
+
+Prefer extending an existing owner test over creating another suite. Skip tests for
+trivial, reversible changes unless they protect a demonstrated regression or a
+consequential contract. Do not add exports, flags, injection hooks, or wrappers solely
+to make private implementation details testable.
+
+A test's existence, speed, or ability to fail is not enough reason to retain it.
+When several tests defend the same outcome, choose a surviving owner and consolidate.
+When a test protects no meaningful contract, remove it without inventing a replacement.
+For a bug regression, demonstrate the intended pre-fix failure when practical.
 
 ## Audit candidates
 
-Look for tests that cannot detect a meaningful failure, including:
+Prioritize:
 
-- Assertion-free runs, self-comparisons, or expectations calculated by the same
-  helper being tested.
-- Exact source, import, string, export-list, or fixture inventories that merely
-  mirror implementation and break under behavior-preserving refactors.
-- Private call-shape or predicate checks already protected by a public boundary.
-- Repeated scenarios across unit, integration, and end-to-end layers without a
-  distinct risk at each layer.
-- Mocks that supply the very behavior being asserted, or negative cases that
-  pass because an unrelated guard rejects the request first.
-- Tests kept only to justify production code with no non-test caller.
-- Test names that promise a contract the assertions do not actually exercise.
+- Unit/component scenarios already covered by a focused journey or integration test.
+- Trivial helper checks, exact copy/configuration inventories, and assertions that
+  break under behavior-preserving refactors.
+- Assertion-free runs, self-comparisons, or expected results computed by the same helper.
+- Mocks that supply the asserted behavior; negative cases rejected by an unrelated guard.
+- Test names that promise behavior the assertions never exercise.
+- Test-only production exports and support machinery with no remaining useful owner.
 
-These are leads, not automatic deletion rules. Keep a test when it independently
-guards a public API, protocol, configuration, migration, storage, security,
-platform, release, or other meaningful contract. Source inspection can be the
-right guard when a specific byte, key, or path is itself the contract. Slow or
-static tests are not inherently low value.
+An exact byte, path, provider field, or migration can be a real contract. Preserve
+necessary security, accounting, data-integrity, and platform coverage at an appropriate
+boundary. Those labels do not automatically justify duplicate tests at every layer.
 
 ## Audit workflow
 
-1. Read applicable repository instructions. Identify the requested scope, the
-   production owner, its callers, existing test layers, and CI routing. Check
-   relevant history before calling a test obsolete.
-2. Discover candidates without editing. For each candidate, record its path and
-   test name, the failure it can detect, overlap with stronger proof, and any
-   production or test-support code it alone keeps alive.
-3. Classify each candidate as retain, repair, consolidate, or remove. Name the
-   surviving owner for every contract moved or deleted. If proof is uncertain,
-   retain the test and report the uncertainty.
-4. Make one coherent change at an ownership boundary. Remove a test-only seam
-   only after confirming it has no production caller and its contract remains
-   covered. Preserve unrelated tests and behavior.
-5. Run the smallest relevant test command and any required project checks.
-   Confirm moved assertions can fail for the intended regression when feasible.
-   Inspect the diff for lost coverage, accidental production changes, and
-   whitespace errors.
+1. Read repository instructions and CI routing. For broad audits, baseline the suite
+   and map critical product journeys and server contracts before reviewing individual
+   tests. Check callers and relevant history before calling a test obsolete.
+2. Choose the intended owners of those outcomes. Identify redundant lower-level tests
+   and setup costs; do not merely collect reasons each current test could be useful.
+3. Classify candidates as retain, repair, consolidate, or remove. Record the path,
+   test name, credible failure, and surviving owner. For removal without replacement,
+   explain why the asserted detail does not warrant regression protection. If coverage
+   of a consequential contract is uncertain, retain it temporarily and report the gap.
+4. Change one ownership boundary at a time. Establish necessary replacement proof
+   before removing existing protection. Remove test-only seams after checking callers.
+   Preserve unrelated production behavior.
+5. Run focused checks and required project verification. Confirm relocated assertions
+   fail for the intended regression where feasible. Review the diff for lost meaningful
+   protection and accidental production changes.
 
-For a whole-subsystem audit, baseline the current tests first, group them by
-behavioral owner, and work through those groups in reviewable batches. Recheck
-coverage after each batch instead of optimizing for deletion count. Treat a
-failing retained test as a possible product defect, not a reason to discard it.
+Work through broad audits in reviewable batches. Judge success by a simpler suite
+with clear ownership, not a deletion quota or exhaustive coverage of every variation.
+Treat a failing retained test as a possible product defect, not a deletion opportunity.
 
 ## Handoff
 
-Report what was retained, repaired, consolidated, or removed; the contract that
-remains protected; any production seam simplified; the checks actually run; and
-unresolved coverage risks. Distinguish pre-existing failures from changes caused
-by the audit.
+Report the maintenance reduced, tests retained/repaired/consolidated/removed, surviving
+E2E or integration owners, and why remaining unit tests warrant isolation. Include any
+production seam simplified, checks actually run, and unresolved risks. Distinguish
+pre-existing failures from audit-introduced failures.
 
 ## Source
 
