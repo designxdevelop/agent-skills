@@ -102,5 +102,5 @@ pre-existing failures from audit-introduced failures.
 
 ## Source
 
-Adapted from [OpenClaw's Test Audit skill](https://github.com/openclaw/openclaw/blob/main/.agents/skills/test-audit/SKILL.md),
+Adapted from OpenClaw's Test Audit skill (GitHub repository `openclaw/openclaw`, file `.agents/skills/test-audit/SKILL.md`),
 copyright © 2026 OpenClaw Foundation, under the MIT License. See [LICENSE](LICENSE).

@@ -17,6 +17,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
 | [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
+| [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack-style investigation, implementation, review, performance, and delivery workflows                        |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 | [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |
@@ -114,7 +115,7 @@ That runs:
 
 Default sync unlinks any PStack copies from the shared hub so Codex, Claude,
 OpenCode, and T3 do not load the Cursor plugin catalog. The Cursor plugin stays
-installed and is the only place PStack should run.
+installed. Use `open-pstack` for the portable adaptation in other hosts.
 
 Add `--with-pstack` only if you intentionally want that catalog back in every
 harness:
@@ -128,7 +129,51 @@ T3 Code uses `~/.config/agents/skills`, which should be a directory symlink to
 refuses to overwrite a standalone directory; back up that directory first if
 you are consolidating an existing T3 installation.
 
-### pstack (Cursor plugin only)
+### Open PStack (Claude, Codex, and chat hosts)
+
+[open-pstack](skills/open-pstack/SKILL.md) is a self-contained adaptation of
+[Lauren Tan's pstack](https://github.com/cursor/plugins/tree/main/pstack), shipped
+inside `dxd-skills`. It includes investigation, debugging, architecture, review,
+performance, PR delivery, and handoff workflows without Cursor dependencies.
+
+After installing the plugin or syncing local skills, ask Claude Code to use
+`open-pstack`, or invoke `$open-pstack` in Codex. For example:
+
+```text
+Use open-pstack to reproduce this bug, fix its cause, and verify the result.
+Use open-pstack to challenge this diff. Review only; do not change files.
+```
+
+For ChatGPT, supply `skills/open-pstack/SKILL.md` and the relevant files from its
+`references/` directory as context in a surface that accepts files. This provides
+workflow guidance; execution and repository access depend on the tools available
+in that chat. It does not install a ChatGPT app. The full skill is included in
+the standard `dxd-skills` plugin submission ZIP; no separate export is needed.
+
+The adaptation pins its reviewed upstream revision and includes the MIT license.
+See [adaptation boundaries](skills/open-pstack/references/upstream.md) for scope.
+Maintainer metadata lives in `scripts/open-pstack-upstream.json` and is excluded
+from the skill bundle. Updates are deliberate, not automatic imports of Cursor
+instructions.
+
+#### Review Open PStack updates
+From a checkout of this repository, fetch the pinned source into a new directory:
+
+```bash
+python3 scripts/fetch-open-pstack-upstream.py --output /tmp/pstack-pinned
+```
+
+To inspect the latest upstream separately:
+
+```bash
+python3 scripts/fetch-open-pstack-upstream.py --ref main --output /tmp/pstack-candidate
+```
+
+The helper retrieves source for review; it never installs skills, executes upstream scripts, or overwrites this adaptation. Compare the two snapshots, read relevant changed source files, and deliberately port useful changes. Preserve host permission boundaries and tool availability fallbacks. Update `scripts/open-pstack-upstream.json` only after reviewing the candidate revision; keep the license when adapting upstream material. Run the repository's packaging sync and check after editing the skill.
+
+The helper lives at the repository root and is a maintainer utility, not a runtime dependency of the installed skill. All normal workflows work offline from the bundled Markdown references.
+
+### Original pstack (Cursor plugin only)
 
 [pstack](https://github.com/cursor/plugins/tree/main/pstack) is a Cursor plugin,
 not a global skill pack. It works best inside Cursor. Do not copy it into the
