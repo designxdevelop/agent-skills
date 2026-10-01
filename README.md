@@ -18,7 +18,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
 | [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
 | [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack-style investigation, implementation, review, performance, and delivery workflows                        |
-| [opencode-security-test](skills/opencode-security-test/SKILL.md)     | Delegate scoped application, firmware, and hardware security testing to OpenCode and review the results                       |
+| [opencode-security-test](skills/opencode-security-test/SKILL.md)     | Run authorized security testing with ranked open-source models in OpenCode, in-session or delegated                        |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 | [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |

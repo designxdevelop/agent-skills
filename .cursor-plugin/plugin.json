@@ -2,7 +2,7 @@
   "name": "dxd-skills",
   "displayName": "DXD Skills",
   "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": {
     "name": "Design X Develop LLC"
   },
