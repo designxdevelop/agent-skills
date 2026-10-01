@@ -70,6 +70,9 @@ agent-skills/
 
 ## Plugin
 
+Website update notifications and activation instructions are documented in
+[website sync](docs/website-sync.md).
+
 The same skills ship as the `dxd-skills` plugin for teammates and other machines.
 Skills load namespaced, for example `dxd-skills:anti-slop`.
 

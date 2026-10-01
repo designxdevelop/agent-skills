@@ -1,0 +1,44 @@
+name: Notify website of skill updates
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+      - 'README.md'
+      - 'PRIVACY.md'
+      - 'assets/**'
+      - '.claude-plugin/**'
+      - '.codex-plugin/**'
+      - '.cursor-plugin/**'
+      - '.agents/plugins/marketplace.json'
+      - '.github/workflows/notify-website.yml'
+      - 'scripts/notify-website.py'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify plugin packaging
+        env:
+          BASE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ -n "$BASE_SHA" && ! "$BASE_SHA" =~ ^0+$ ]]; then
+            python3 scripts/sync-plugin-packaging.py --check --base "$BASE_SHA"
+          else
+            python3 scripts/sync-plugin-packaging.py --check
+          fi
+      - name: Notify dxd-2026
+        env:
+          DXD_WEBSITE_DISPATCH_TOKEN: ${{ secrets.DXD_WEBSITE_DISPATCH_TOKEN }}
+        run: python3 scripts/notify-website.py
