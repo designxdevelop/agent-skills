@@ -87,7 +87,10 @@ Run `python3 scripts/build-openai-submission.py` from the repository root. It ch
 the plugin packaging, then creates `dist/dxd-skills-<version>-openai-submission.zip`
 with the Codex plugin manifest, canonical skills, and branding assets. Upload that ZIP through
 the OpenAI Platform's **Skills only** plugin submission flow. The `dist/` folder is
-ignored by Git; build a fresh ZIP after each version bump.
+ignored by Git; build a fresh ZIP after each version bump. The ZIP includes
+`PRIVACY.md`; the listing links to the published policy at
+[designxdevelop.com/agent-skills/privacy](https://designxdevelop.com/agent-skills/privacy). Keep that page
+and the packaged policy aligned, and publish the page before submitting.
 
 ## Global Agent Config
 

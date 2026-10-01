@@ -1,9 +1,9 @@
 {
   "name": "dxd-skills",
-  "version": "0.5.2",
-  "description": "Practical DXD skills for code quality, design, writing, CI, testing, deployment, and resuming work.",
+  "version": "0.5.4",
+  "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
   "author": {
-    "name": "Design x Develop",
+    "name": "Design X Develop LLC",
     "url": "https://designxdevelop.com"
   },
   "homepage": "https://github.com/designxdevelop/agent-skills",
@@ -24,20 +24,34 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "DXD Skills",
-    "shortDescription": "Practical skills for agents",
-    "longDescription": "Practical DXD skills for code quality, design, writing, CI, testing, deployment, and resuming work.",
-    "developerName": "Design x Develop",
-    "category": "Productivity",
+    "shortDescription": "Skills for code, design & copy",
+    "longDescription": "DXD Skills is a collection of reusable workflows for developers, designers, and teams working with coding agents. Its main purpose is to improve software development and the design, writing, research, and project work that supports it.\n\nEngineering skills audit repository readiness, review code structure, investigate bugs and architecture with Open PStack, set up CI verification, simplify test suites, derive HTTP clients or CLIs from browser traffic, and sync deployment branches.\n\nDesign and writing skills develop visual directions for web and app interfaces, create and edit designs in Paper, improve UI text, and remove formulaic AI-writing patterns while preserving the author's voice. Company research skills produce reusable profiles, bios, and page copy.\n\nProject and agent workflows recover the current state of ongoing work, learn from recent agent sessions to improve reusable skills, and adapt communication for readers with ADHD.\n\nThe plugin provides skill instructions and supporting files. Workflows use your agent's workspace and enabled tools; the package does not include a hosted service or MCP server.",
+    "developerName": "Design X Develop LLC",
+    "category": "Developer Tools",
     "capabilities": [
-      "Read",
-      "Write"
+      "Audit repository readiness",
+      "Review code structure",
+      "Investigate bugs and architecture",
+      "Set up CI verification",
+      "Simplify test suites",
+      "Derive HTTP clients and CLIs",
+      "Sync deployment branches",
+      "Design web and app interfaces",
+      "Create and edit Paper designs",
+      "Improve UI text",
+      "Edit prose while preserving voice",
+      "Research and write company profiles",
+      "Resume ongoing work",
+      "Improve skills from agent sessions",
+      "Adapt communication for ADHD"
     ],
     "websiteURL": "https://designxdevelop.com",
+    "privacyPolicyURL": "https://designxdevelop.com/agent-skills/privacy",
     "logo": "./assets/dxd-plugin-logo.svg",
     "composerIcon": "./assets/dxd-composer-icon.svg",
     "defaultPrompt": [
-      "Audit this repository for agent readiness.",
       "Run a DXD code review on this branch.",
+      "Design a clear visual direction for this interface.",
       "Remove AI-writing tells from this draft."
     ]
   }

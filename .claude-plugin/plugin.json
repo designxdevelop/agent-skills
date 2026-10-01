@@ -1,9 +1,9 @@
 {
   "name": "dxd-skills",
-  "description": "Practical DXD skills for code quality, design, writing, CI, testing, deployment, and resuming work.",
-  "version": "0.5.2",
+  "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
+  "version": "0.5.4",
   "author": {
-    "name": "Design x Develop"
+    "name": "Design X Develop LLC"
   },
   "repository": "https://github.com/designxdevelop/agent-skills",
   "keywords": [

@@ -2,14 +2,14 @@
   "name": "dxd-skills",
   "description": "DXD agent skills for Claude Code.",
   "owner": {
-    "name": "Design x Develop"
+    "name": "Design X Develop LLC"
   },
   "plugins": [
     {
       "name": "dxd-skills",
-      "description": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning.",
+      "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
       "author": {
-        "name": "Design x Develop"
+        "name": "Design X Develop LLC"
       },
       "source": "./",
       "repository": "https://github.com/designxdevelop/agent-skills",

@@ -1,16 +1,16 @@
 {
   "name": "dxd-skills",
   "owner": {
-    "name": "Design x Develop"
+    "name": "Design X Develop LLC"
   },
   "metadata": {
-    "description": "Design x Develop agent skills for Cursor."
+    "description": "Agent skills from Design X Develop LLC for Cursor."
   },
   "plugins": [
     {
       "name": "dxd-skills",
       "source": "./",
-      "description": "Custom DXD agent skills for agent-readiness audits, CI verification, code review, prose and UI-text cleanup, interface design, Paper design, browser-derived API clients, live work recovery, deploy branch sync, and session learning."
+      "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows."
     }
   ]
 }
