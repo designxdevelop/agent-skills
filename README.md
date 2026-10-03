@@ -4,6 +4,20 @@ Reusable skill definitions for AI coding agents. Each skill is a structured Mark
 
 Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, and other agent routers. The YAML frontmatter in each file provides the trigger metadata agents use to decide when to load the skill.
 
+## Quick start
+
+On this machine, refresh the installed skills from this checkout:
+
+```bash
+./scripts/sync-all-agent-config.sh
+```
+
+Then ask your agent to use a skill by name, for example:
+`Use anti-slop to make this paragraph clearer while preserving my voice.`
+
+For a separate installation, follow [Plugin](#plugin). Use either local sync or
+the plugin, not both, to avoid duplicate skills.
+
 ## Available Skills
 
 | Skill                                                                  | Description                                                                                                                   |
@@ -48,6 +62,8 @@ agent-skills/
 ├── .agents/plugins/marketplace.json  # Codex marketplace
 ├── scripts/
 │   ├── sync-plugin-packaging.py    # aligned plugin version bumps
+│   ├── verify.py                  # local and CI verification
+│   ├── check-markdown.py          # local links and whitespace
 │   ├── build-openai-submission.py  # public skills-only ZIP
 │   ├── sync-agent-symlinks.sh
 │   ├── sync-pstack-skills.sh
@@ -60,14 +76,27 @@ agent-skills/
 
 1. Check the current inventory for overlap, then create `skills/<skill-name>/SKILL.md`.
 2. Add precise YAML routing metadata and the task-specific instructions it needs.
-3. Validate frontmatter, relative links, and Markdown whitespace.
-4. Update the Available Skills table when adding, removing, or changing a skill's scope.
-5. Run `python3 scripts/sync-plugin-packaging.py` to bump all plugin manifest
-   versions, then confirm with `--check`.
+3. Update the Available Skills table when adding, removing, or changing a skill's scope.
+4. Run `python3 scripts/sync-plugin-packaging.py` to bump all plugin manifest versions.
+5. Run `python3 scripts/verify.py` to check Markdown, frontmatter, packaging, and the submission ZIP.
 6. Run `./scripts/sync-agent-symlinks.sh` to refresh custom skill links, or install the
    local hooks once with `./scripts/install-local-githooks.sh`.
 7. Commit the skill and the manifest bumps together, with an imperative message such
    as `Add <skill-name> skill`.
+
+## Verification
+
+Run the same checks locally as CI:
+
+```bash
+python3 scripts/verify.py
+```
+
+This checks Markdown whitespace and local link targets, tests the Markdown
+checker, validates plugin packaging, and builds and verifies the public
+submission ZIP in `dist/`. External URLs and link fragments are not checked.
+
+For Markdown-only edits, run `python3 scripts/check-markdown.py`.
 
 ## Plugin
 

@@ -17,12 +17,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify plugin packaging
+      - name: Verify repository
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           if [[ -n "$BASE_SHA" && ! "$BASE_SHA" =~ ^0+$ ]]; then
-            python3 scripts/sync-plugin-packaging.py --check --base "$BASE_SHA"
+            python3 scripts/verify.py --base "$BASE_SHA"
           else
-            python3 scripts/sync-plugin-packaging.py --check
+            python3 scripts/verify.py
           fi

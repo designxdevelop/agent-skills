@@ -13,7 +13,7 @@ This repository contains portable agent skills and the `dxd-skills` plugin for C
 - Keep each instruction once. Use sections, checklists, and examples only when they add useful guidance; no fixed body template is required.
 - Preserve tool protocols, user preferences, and concrete failure boundaries. Avoid mandatory design rituals, vendor defaults, and generic repeated verification.
 - Put substantial mode-specific procedures in references and explain when to read them.
-- Validate changed relative links and Markdown whitespace. The packaging check below covers frontmatter names and README inventory; there is no application build or test suite.
+- Validate Markdown links and whitespace with `python3 scripts/check-markdown.py`.
 
 ## Plugin packaging
 
@@ -34,6 +34,13 @@ python3 scripts/sync-plugin-packaging.py --check
 ```
 
 Done means the check passes: matching Claude, Codex, and Cursor versions, bumped above the last commit whenever skill content changed; frontmatter `name` equal to the directory; and a README table row for every skill. Commit the manifest bumps in the same commit as the skill change. CI runs the same check against the PR base.
+
+## Verification
+
+Run `python3 scripts/verify.py` before finishing a change. CI runs the same
+command with `--base <commit>` for the packaging version comparison. It checks
+Markdown, runs the checker regression tests, validates packaging, and builds
+and verifies the submission ZIP in ignored `dist/`.
 
 ## Local installation
 
