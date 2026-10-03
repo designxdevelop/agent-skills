@@ -22,6 +22,7 @@ Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, a
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 | [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |
+| [simplified-technical-english](skills/simplified-technical-english/SKILL.md) | Write, rewrite, and check technical documentation in ASD-STE100 Simplified Technical English |
 | [test-audit](skills/test-audit/SKILL.md)                               | Prefer focused E2Es and API/database contracts; prune redundant unit and component tests                    |
 | [ui-text-audit](skills/ui-text-audit/SKILL.md)                         | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                       |
 
