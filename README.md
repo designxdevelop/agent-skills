@@ -34,6 +34,7 @@ the plugin, not both, to avoid duplicate skills.
 | [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack-style investigation, implementation, review, performance, and delivery workflows                        |
 | [opencode-security-test](skills/opencode-security-test/SKILL.md)     | Run authorized security testing with ranked open-source models in OpenCode, in-session or delegated                        |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
+| [pr-babysit](skills/pr-babysit/SKILL.md) | Watch or repair PRs with existing monitors, one writer, and safe merge and stack handling |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
 | [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |
 | [simplified-technical-english](skills/simplified-technical-english/SKILL.md) | Write, rewrite, and check technical documentation in ASD-STE100 Simplified Technical English |
