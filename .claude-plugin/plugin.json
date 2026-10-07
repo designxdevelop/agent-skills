@@ -1,10 +1,13 @@
 {
   "name": "dxd-skills",
   "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "author": {
-    "name": "Design X Develop LLC"
+    "name": "Design X Develop LLC",
+    "email": "austin@designxdevelop.com",
+    "url": "https://designxdevelop.com"
   },
+  "license": "MIT",
   "repository": "https://github.com/designxdevelop/agent-skills",
   "keywords": [
     "dxd",
