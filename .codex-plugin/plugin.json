@@ -1,6 +1,6 @@
 {
   "name": "dxd-skills",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
   "author": {
     "name": "Design X Develop LLC",
@@ -27,12 +27,13 @@
   "interface": {
     "displayName": "DXD Skills",
     "shortDescription": "Skills for code, design & copy",
-    "longDescription": "DXD Skills is a collection of reusable workflows for developers, designers, and teams working with coding agents. Its main purpose is to improve software development and the design, writing, research, and project work that supports it.\n\nEngineering skills audit repository readiness, review code structure, investigate bugs and architecture with Open PStack, set up CI verification, simplify test suites, derive HTTP clients or CLIs from browser traffic, and sync deployment branches.\n\nDesign and writing skills develop visual directions for web and app interfaces, create and edit designs in Paper, improve UI text, and remove formulaic AI-writing patterns while preserving the author's voice. Company research skills produce reusable profiles, bios, and page copy.\n\nProject and agent workflows recover the current state of ongoing work, learn from recent agent sessions to improve reusable skills, and adapt communication for readers with ADHD.\n\nThe plugin provides skill instructions and supporting files. Workflows use your agent's workspace and enabled tools; the package does not include a hosted service or MCP server.",
+    "longDescription": "DXD Skills is a collection of reusable workflows for developers, designers, and teams working with coding agents. Its main purpose is to improve software development and the design, writing, research, and project work that supports it.\n\nEngineering skills audit repository readiness, review code structure, send a diff to a different model family for an adversarial bug review, investigate bugs and architecture with Open PStack, set up CI verification, simplify test suites, derive HTTP clients or CLIs from browser traffic, and sync deployment branches.\n\nDesign and writing skills develop visual directions for web and app interfaces, create and edit designs in Paper, improve UI text, and remove formulaic AI-writing patterns while preserving the author's voice. Company research skills produce reusable profiles, bios, and page copy.\n\nProject and agent workflows recover the current state of ongoing work, learn from recent agent sessions to improve reusable skills, and adapt communication for readers with ADHD.\n\nThe plugin provides skill instructions and supporting files. Workflows use your agent's workspace and enabled tools; the package does not include a hosted service or MCP server.",
     "developerName": "Design X Develop LLC",
     "category": "Developer Tools",
     "capabilities": [
       "Audit repository readiness",
       "Review code structure",
+      "Review diffs with a different model family",
       "Investigate bugs and architecture",
       "Set up CI verification",
       "Simplify test suites",
