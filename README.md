@@ -22,6 +22,7 @@ the plugin, not both, to avoid duplicate skills.
 
 | Skill                                                                  | Description                                                                                                                   |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [adversarial-review](skills/adversarial-review/SKILL.md)               | Send a diff to a different model family for an adversarial bug review, then triage every finding                              |
 | [agent-native-audit](skills/agent-native-audit/SKILL.md)               | Assess agent readiness with repository evidence; use optional scores for comparisons                                          |
 | [anti-slop](skills/anti-slop/SKILL.md)                                 | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
 | [better-ai-design](skills/better-ai-design/SKILL.md)                   | Develop a strong visual direction for consequential interface work, with optional exploration and critique                    |
