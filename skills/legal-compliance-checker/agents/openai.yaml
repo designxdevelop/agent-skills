@@ -1,0 +1,3 @@
+interface:
+  display_name: "Legal Compliance Checker"
+  short_description: "Audit six app compliance risks with US-first scope"

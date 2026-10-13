@@ -7,6 +7,7 @@ on:
       - 'skills/**'
       - 'README.md'
       - 'PRIVACY.md'
+      - 'TERMS.md'
       - 'assets/**'
       - '.claude-plugin/**'
       - '.codex-plugin/**'

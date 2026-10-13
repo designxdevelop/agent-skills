@@ -32,6 +32,7 @@ the plugin, not both, to avoid duplicate skills.
 | [dxd-code-review](skills/dxd-code-review/SKILL.md)                     | Run an extremely strict DXD-style maintainability review for abstraction quality, giant files, and spaghetti-condition growth |
 | [i-have-adhd](skills/i-have-adhd/SKILL.md)                             | Shape responses for ADHD-friendly reading with direct outcomes, bounded actions, and visible state                            |
 | [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
+| [legal-compliance-checker](skills/legal-compliance-checker/SKILL.md) | Audit six app compliance risks with US-first scope and targeted international coverage |
 | [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack-style investigation, implementation, review, performance, and delivery workflows                        |
 | [opencode-security-test](skills/opencode-security-test/SKILL.md)     | Run authorized security testing with ranked open-source models in OpenCode, in-session or delegated                        |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |

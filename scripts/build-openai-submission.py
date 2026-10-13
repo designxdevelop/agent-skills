@@ -44,17 +44,18 @@ def main() -> int:
     if any(key in manifest for key in ("apps", "mcpServers")):
         raise ValueError("skills-only submissions cannot include app or MCP configuration")
 
-    privacy_url = interface.get("privacyPolicyURL")
-    if not isinstance(privacy_url, str) or not privacy_url or len(privacy_url) > 1024:
-        raise ValueError("public listing privacyPolicyURL must be a non-empty string under 1025 characters")
-    parsed_privacy_url = urlsplit(privacy_url)
-    if (
-        parsed_privacy_url.scheme != "https"
-        or not parsed_privacy_url.hostname
-        or parsed_privacy_url.username is not None
-        or parsed_privacy_url.password is not None
-    ):
-        raise ValueError("public listing privacyPolicyURL must be HTTPS without embedded credentials")
+    for key in ("websiteURL", "privacyPolicyURL", "termsOfServiceURL", "supportURL"):
+        url = interface.get(key)
+        if not isinstance(url, str) or not url or len(url) > 1024:
+            raise ValueError(f"public listing {key} must be a non-empty string under 1025 characters")
+        parsed_url = urlsplit(url)
+        if (
+            parsed_url.scheme != "https"
+            or not parsed_url.hostname
+            or parsed_url.username is not None
+            or parsed_url.password is not None
+        ):
+            raise ValueError(f"public listing {key} must be HTTPS without embedded credentials")
 
     for key in ("logo", "composerIcon"):
         relative = interface.get(key)
@@ -73,6 +74,7 @@ def main() -> int:
     files = [
         MANIFEST,
         ROOT / "PRIVACY.md",
+        ROOT / "TERMS.md",
         *sorted(path for path in SKILLS.rglob("*") if path.is_file()),
         *sorted(path for path in ASSETS.rglob("*") if path.is_file()),
     ]

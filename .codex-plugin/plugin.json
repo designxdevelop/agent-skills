@@ -1,6 +1,6 @@
 {
   "name": "dxd-skills",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
   "author": {
     "name": "Design X Develop LLC",
@@ -50,6 +50,8 @@
     ],
     "websiteURL": "https://designxdevelop.com",
     "privacyPolicyURL": "https://designxdevelop.com/agent-skills/privacy",
+    "termsOfServiceURL": "https://designxdevelop.com/agent-skills/terms",
+    "supportURL": "https://github.com/designxdevelop/agent-skills/issues",
     "logo": "./assets/dxd-plugin-logo.svg",
     "composerIcon": "./assets/dxd-composer-icon.svg",
     "defaultPrompt": [
