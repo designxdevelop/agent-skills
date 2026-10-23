@@ -9,7 +9,6 @@ declare -a ROOTS=(
   "$HOME/.codex/skills"
   "$HOME/.config/opencode/skills"
   "$HOME/.claude/skills"
-  "$HOME/.config/agents/skills"
 )
 
 printf '%-34s %7s %9s %9s\n' 'Root' 'Entries' 'Symlinks' 'Standalone'
@@ -47,13 +46,11 @@ else
   printf '\nPStack: %s skill(s) still linked into the shared hub.\n' "$pstack_hub"
 fi
 
+printf '\nT3 Code reads the hub and the Cursor, Claude, Codex, and OpenCode spokes.\n'
+printf 'It does not read ~/.config/agents/skills.\n'
 if [[ -L "$HOME/.config/agents/skills" ]]; then
   t3_target="$(readlink -f "$HOME/.config/agents/skills")"
-  if [[ "$t3_target" == "$HUB" ]]; then
-    printf '\nT3 Code: linked to the shared hub.\n'
-  else
-    printf '\nT3 Code: linked elsewhere (%s).\n' "$t3_target"
-  fi
-else
-  printf '\nT3 Code: not linked to the shared hub.\n'
+  printf 'Legacy alias remains at ~/.config/agents/skills -> %s.\n' "$t3_target"
+elif [[ -d "$HOME/.config/agents/skills" ]]; then
+  printf 'Legacy directory remains at ~/.config/agents/skills and is not a T3 skill root.\n'
 fi

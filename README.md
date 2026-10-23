@@ -136,7 +136,7 @@ This repo is the source of truth for machine-wide agent configuration on Austin'
 
 | Path in repo  | Sync target                                                  | Purpose                                             |
 | ------------- | ------------------------------------------------------------ | --------------------------------------------------- |
-| `skills/*/`   | `~/.agents/skills/*` (+ Cursor/Claude/Codex/OpenCode spokes; T3 Code aliases the hub) | Custom DXD skills                                   |
+| `skills/*/`   | `~/.agents/skills/*` and the Cursor, Claude, Codex, and OpenCode spokes T3 Code reads | Custom DXD skills                                   |
 
 Run a full sync anytime:
 
@@ -165,10 +165,14 @@ harness:
 ./scripts/sync-all-agent-config.sh --with-pstack
 ```
 
-T3 Code uses `~/.config/agents/skills`, which should be a directory symlink to
-`~/.agents/skills`. The sync script creates the alias when it is absent and
-refuses to overwrite a standalone directory; back up that directory first if
-you are consolidating an existing T3 installation.
+T3 Code nightly does not read `~/.config/agents/skills`. It discovers skills from
+the connected provider: Cursor reads `~/.cursor/skills`, `~/.agents/skills`,
+`~/.codex/skills`, and `~/.claude/skills` (and those same directories under the
+session working directory); Claude reads `~/.claude/skills`; Codex reads
+`~/.codex/skills`, `~/.agents/skills`, and its installed plugins; OpenCode reads
+`~/.config/opencode/skills`. The sync script links each skill into those
+directories. A leftover directory symlink at `~/.config/agents/skills` is not
+that discovery path.
 
 ### Open PStack (Claude, Codex, and chat hosts)
 
