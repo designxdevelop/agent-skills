@@ -1,6 +1,6 @@
 # Harness detection and seat invocation
 
-Read this before launching a seat. Model ids below are the pinned ids from the cited docs. A catalog id is usable only when that catalog printed it. Otherwise the seat is empty. Never invent an id.
+Read this before launching a seat. Model ids below are the pinned ids from the cited docs. On OpenCode and T3, a catalog id is usable only when that catalog printed it. Never invent an id.
 
 ## Seat ids
 
@@ -8,11 +8,11 @@ Read this before launching a seat. Model ids below are the pinned ids from the c
 | --- | --- | --- |
 | Opus 5.5 | `claude-opus-5-5` | Claude Code `--model` and the Claude API. On OpenCode or T3, a printed catalog slug whose model segment is `claude-opus-5-5` |
 | GPT-6.1 Sol | `gpt-6.1-sol` | Codex CLI `-m` / `--model`. On OpenCode or T3, a printed catalog slug whose model segment is `gpt-6.1-sol` |
-| Grok 4.7 | `grok-4.7` | xAI API and a printed OpenCode or T3 catalog slug whose model segment is exactly `grok-4.7`. Not an effort-tier id |
+| Grok 4.7 | `grok-4.7` | Cursor CLI `--model`. On OpenCode or T3, a printed catalog slug whose model segment is exactly `grok-4.7` |
 
-Sources: [Codex models](https://learn.chatgpt.com/docs/models) (`codex --model gpt-6.1-sol`, `codex exec -m gpt-6.1-sol`; the published list has no `grok-4.7`), [Claude Code model configuration](https://code.claude.com/docs/en/model-config) (`claude-opus-5-5`; the `opus` alias moves, so pass the full id; the page has no `grok-4.7`), [Grok 4.7](https://docs.x.ai/developers/grok-4-7) (model name `grok-4.7`; reasoning is `low`, `medium`, `high`, or `xhigh` on that id), [OpenCode console models](https://opencode.ai/v2/docs/console/models/) (`grok-4.7`), [Grok 4.7 on models.dev](https://models.opencode.ai/models/xai/grok-4.7/) (`xai/grok-4.7`).
+Sources: [Codex models](https://learn.chatgpt.com/docs/models) (`codex --model gpt-6.1-sol`, `codex exec -m gpt-6.1-sol`; the published list has no `grok-4.7`), [Claude Code model configuration](https://code.claude.com/docs/en/model-config) (`claude-opus-5-5`; the `opus` alias moves, so pass the full id; the page has no `grok-4.7`), [Grok 4.7](https://docs.x.ai/developers/grok-4-7) (model name `grok-4.7`; reasoning is `low`, `medium`, `high`, or `xhigh` on that id), [OpenCode console models](https://opencode.ai/v2/docs/console/models/) (`grok-4.7`), [Grok 4.7 on models.dev](https://models.opencode.ai/models/xai/grok-4.7/) (`xai/grok-4.7`), [Cursor CLI parameters](https://cursor.com/docs/cli/reference/parameters) (`--model`, `-p`, `--mode`, `--output-format`, `--trust`), [Cursor CLI overview](https://cursor.com/docs/cli/overview) (`agent -p ... --model`, `--mode=ask`), [Cursor evals](https://cursor.com/docs/evals) (model id `grok-4.7`).
 
-The Grok seat is the plain id `grok-4.7`, which those docs publish. Use that id. An effort-tier string such as `grok-4.7-medium` is the same model with a reasoning setting, and it is not the id to pass.
+The Grok seat is the plain id `grok-4.7`. Use that id on the Cursor CLI and when a catalog prints it. An effort-tier string such as `grok-4.7-medium` is the same model with a reasoning setting, and it is not the id to pass. If `agent models` shows only those effort-tier ids, still pass `grok-4.7`.
 
 OpenCode selectors are `provider/model`. Docs examples include `opencode/gpt-6.1-sol`, `openai/gpt-6.1-sol`, and `anthropic/claude-sonnet-5-5`. Grok's published ids are `grok-4.7` and `xai/grok-4.7`. Match the seat against the model segment of a line `opencode models` printed. A Zen or direct-provider prefix is fine. The Grok segment must be exactly `grok-4.7`.
 
@@ -22,19 +22,19 @@ Check in this order. T3 Code and OpenCode win when they are the host, even if th
 
 | Order | Harness | How to tell | Dispatch |
 | --- | --- | --- | --- |
-| 1 | T3 Code | The host or product name is T3 Code | Connected T3 providers only. Do not execute `claude`, `codex`, or `opencode` |
-| 2 | OpenCode | The session or product name is OpenCode | `opencode models`, then `opencode run`. Do not execute `claude` or `codex` |
-| 3 | Claude Code | The product is Claude Code, or `CLAUDECODE` is `1` | Codex CLI for GPT-6.1 Sol. Codex has no Opus 5.5 or `grok-4.7` id |
-| 4 | Codex | The product is Codex | Claude Code CLI for Opus 5.5. Claude has no GPT-6.1 Sol or `grok-4.7` id |
+| 1 | T3 Code | The host or product name is T3 Code | Connected T3 providers only. Do not execute `claude`, `codex`, `opencode`, or `agent` |
+| 2 | OpenCode | The session or product name is OpenCode | `opencode models`, then `opencode run`. Do not execute `claude`, `codex`, or `agent` |
+| 3 | Claude Code | The product is Claude Code, or `CLAUDECODE` is `1` | Codex CLI for GPT-6.1 Sol. Cursor CLI for Grok 4.7. Codex has no Opus 5.5 id |
+| 4 | Codex | The product is Codex | Claude Code CLI for Opus 5.5. Cursor CLI for Grok 4.7. Claude has no GPT-6.1 Sol id |
 | 5 | Anything else | No row above matches | Stop. Name the host. Leave every seat empty |
 
 `CLAUDECODE=1` is set in subprocesses Claude Code spawns ([Claude Code environment variables](https://code.claude.com/docs/en/env-vars)). Detect T3 Code and OpenCode by the product name. A `T3CODE_` variable is not required.
 
 A same-provider subagent is not a seat. The turn has to be the pinned model for that seat.
 
-Claude Code is Anthropic-only, and Codex is OpenAI-only. From Claude Code the opposite CLI is `codex`. From Codex the opposite CLI is `claude`. Neither CLI publishes `grok-4.7`, and neither can host the other lab's seat. Report those seats empty. Do not point `codex exec` at `claude-opus-5-5` or `grok-4.7`, and do not point `claude` at `gpt-6.1-sol` or `grok-4.7`.
+Claude Code is Anthropic-only, and Codex is OpenAI-only. From Claude Code the opposite CLI is `codex`, and it seats GPT-6.1 Sol. From Codex the opposite CLI is `claude`, and it seats Opus 5.5. Neither of those CLIs publishes `grok-4.7`. From either harness, seat Grok 4.7 with the Cursor CLI. Do not point `codex exec` at `claude-opus-5-5` or `grok-4.7`, and do not point `claude` at `gpt-6.1-sol` or `grok-4.7`.
 
-On Claude Code, Opus 5.5 is empty unless this session's resolved id is `claude-opus-5-5`, in which case the caller already is that seat and the seat stays dropped. On Codex, GPT-6.1 Sol is empty unless this session's resolved id is `gpt-6.1-sol`, in which case the seat stays dropped. On both, Grok 4.7 is empty unless this session's resolved id is `grok-4.7` or that id with an effort suffix, in which case the seat stays dropped. Say which description applies.
+On Claude Code, Opus 5.5 is empty unless this session's resolved id is `claude-opus-5-5`, in which case the caller already is that seat and the seat stays dropped. On Codex, GPT-6.1 Sol is empty unless this session's resolved id is `gpt-6.1-sol`, in which case the seat stays dropped. A missing Grok id on `codex` or `claude` does not empty the Grok seat. Say which description applies.
 
 ## T3 Code
 
@@ -91,7 +91,25 @@ cat "$brief" | claude -p --model claude-opus-5-5 \
 
 `--print` / `-p` is non-interactive. `--tools` limits the built-in tools to reads. `--permission-prompts none` denies anything that would have prompted. Do not pass `--dangerously-skip-permissions`.
 
-Sources: [Codex CLI reference](https://developers.openai.com/codex/cli/reference), [Codex non-interactive mode](https://developers.openai.com/codex/noninteractive), [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference).
+Grok 4.7 from Claude Code or Codex. Check the Cursor binary and login first:
+
+```bash
+command -v agent
+agent status
+```
+
+`agent login` is the login command. `agent models` lists the account catalog. A missing `agent` binary or a status that says not logged in leaves the Grok seat empty. Quote the error. Do not replace it with an effort-tier id or with `codex` or `claude`.
+
+`brief` is the absolute path of the brief file. The parameters page does not document stdin as the prompt, so the prompt names that file:
+
+```bash
+agent -p --mode=ask --model "grok-4.7" --output-format text --trust \
+  "Read ${brief} and argue against the merge in that brief. Leave the tree unchanged. Return objections only."
+```
+
+`--mode=ask` is read-only. `--trust` skips the headless workspace prompt. `--output-format text` requires `--print`. Do not pass `--force` or `--yolo`. If `agent models` lists only effort-tier ids, keep `--model "grok-4.7"`. A run that fails because the account cannot use `grok-4.7` leaves the seat empty.
+
+Sources: [Codex CLI reference](https://developers.openai.com/codex/cli/reference), [Codex non-interactive mode](https://developers.openai.com/codex/noninteractive), [Claude Code CLI reference](https://code.claude.com/docs/en/cli-reference), [Cursor CLI parameters](https://cursor.com/docs/cli/reference/parameters), [Cursor CLI overview](https://cursor.com/docs/cli/overview).
 
 ## When a seat is empty
 
@@ -103,11 +121,14 @@ Report the matching setup and stop that seat.
 | `codex` present, `codex login status` non-zero | `codex login` |
 | `claude` missing | `curl -fsSL https://claude.ai/install.sh | bash` |
 | `claude` present, `claude auth status` non-zero | `claude auth login` |
-| Opposite CLI cannot host the seat | Say the CLI has no id for that seat. Claude Code can seat GPT-6.1 Sol. Codex can seat Opus 5.5. Grok 4.7 needs a T3 or OpenCode catalog entry whose model segment is `grok-4.7` |
-| T3 provider not connected | Name the provider in T3's provider settings. Do not launch `claude`, `codex`, or `opencode` to replace it |
-| OpenCode catalog lacks the seat | `/connect` for that provider, then rerun `opencode models` |
-| Catalog shows only an effort-tier Grok id | The seat id is `grok-4.7`. Leave the seat empty until the catalog prints that exact model segment |
+| Opposite CLI cannot host the seat | Say the CLI has no id for that seat. Claude Code seats GPT-6.1 Sol through Codex and Grok 4.7 through `agent`. Codex seats Opus 5.5 through `claude` and Grok 4.7 through `agent` |
+| `agent` missing | `curl https://cursor.com/install -fsS \| bash` |
+| `agent status` says not logged in | `agent login` |
+| Cursor account cannot run `grok-4.7` | Quote `agent models` or the failed run. The seat id stays `grok-4.7` |
+| T3 provider not connected | Name the provider in T3's provider settings. Do not launch `claude`, `codex`, `opencode`, or `agent` to replace it |
+| OpenCode catalog lacks the seat | `/connect` for that provider, then rerun `opencode models`. Do not launch `agent` |
+| T3 or OpenCode shows only an effort-tier Grok id | The seat id is `grok-4.7`. Leave the seat empty until that catalog prints that exact model segment |
 
-Sources: [Codex CLI install](https://learn.chatgpt.com/docs/codex/cli), [Codex login](https://developers.openai.com/codex/cli/reference), [Claude Code setup](https://code.claude.com/docs/en/getting-started).
+Sources: [Codex CLI install](https://learn.chatgpt.com/docs/codex/cli), [Codex login](https://developers.openai.com/codex/cli/reference), [Claude Code setup](https://code.claude.com/docs/en/getting-started), [Cursor CLI overview](https://cursor.com/docs/cli/overview).
 
 npm also installs Codex: `npm install -g @openai/codex`. Prefer the install script unless the user already uses npm for it.
