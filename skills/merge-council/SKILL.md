@@ -1,10 +1,10 @@
 ---
 name: merge-council
 description: >-
-  Convene Opus 5.5, Muse Wonder Full, and GPT-6.1 Sol to argue a change
-  before it can merge. Use when the user asks to merge, land, or ship, or
-  asks for this council before a merge. A cross-lab bug hunt with no merge
-  is adversarial-review.
+  Convene Opus 5.5, Grok 4.7, and GPT-6.1 Sol to argue a change before it
+  can merge. Use when the user asks to merge, land, or ship, or asks for
+  this council before a merge. A cross-lab bug hunt with no merge is
+  adversarial-review.
 ---
 
 # Merge council
@@ -21,11 +21,9 @@ Review the current branch against its base, including uncommitted changes. When 
 
 ## Seats
 
-The council is Opus 5.5, Muse Wonder Full, and GPT-6.1 Sol. Pass only the ids in the harness reference.
+The council is Opus 5.5, Grok 4.7, and GPT-6.1 Sol. Pass only the ids in the harness reference. Grok 4.7 uses the plain id `grok-4.7`. That id exists on the xAI API and in the OpenCode catalog. Reasoning effort (`low`, `medium`, `high`, `xhigh`) is a setting on it, so the seat is not an effort-tier id such as `grok-4.7-medium`.
 
-Name the model id this session is already running. Use the harness status line or model picker when the conversation does not already show it. Drop the seat whose id is that model. A dropped caller seat is not an empty seat. The caller still convenes the remaining seats and answers them. Resolve an alias such as `opus` to a full id before dropping a seat. An unknown caller id drops nothing.
-
-`muse-wonder-1.0` is a different model. Maximum reasoning effort on it does not fill the Muse Wonder Full seat.
+Name the model id this session is already running. Use the harness status line or model picker when the conversation does not already show it. Drop the seat whose id is that model. Also drop Grok 4.7 when the session id is `grok-4.7` with an effort suffix, such as `grok-4.7-medium`. A dropped caller seat is not an empty seat. The caller still convenes the remaining seats and answers them. Resolve an alias such as `opus` to a full id before dropping a seat. An unknown caller id drops nothing.
 
 ## Brief
 
