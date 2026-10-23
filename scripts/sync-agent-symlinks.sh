@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Sync skills/ in this repo to ~/.agents/skills and tool-specific spokes.
+# T3 Code nightly reads those provider directories. It does not read
+# ~/.config/agents/skills.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_DIR="$REPO_ROOT/skills"
 AGENTS_HUB="$HOME/.agents/skills"
-T3_SKILLS_DIR="$HOME/.config/agents/skills"
 QUIET=0
 
 if [[ "${1:-}" == "--quiet" ]]; then
@@ -38,20 +39,14 @@ fi
 
 mkdir -p "$AGENTS_HUB"
 
-# T3 Code reads ~/.config/agents/skills. Keep that entire directory as an alias
-# of the shared hub so it cannot drift from the other harnesses.
-if [[ -L "$T3_SKILLS_DIR" ]]; then
-  ln -sfn "$AGENTS_HUB" "$T3_SKILLS_DIR"
-elif [[ -e "$T3_SKILLS_DIR" ]]; then
-  log "T3 skills directory exists and is not a symlink: $T3_SKILLS_DIR"
-  log "Move it to a backup, then link it to $AGENTS_HUB before syncing."
-else
-  mkdir -p "$(dirname "$T3_SKILLS_DIR")"
-  ln -s "$AGENTS_HUB" "$T3_SKILLS_DIR"
-  log "Linked T3 Code skills -> ~/.agents/skills"
-fi
-
 # Spoke dirs symlink into the shared hub (relative paths from each spoke root).
+# T3 Code nightly (com.t3tools.t3code) does not read ~/.config/agents/skills.
+# It discovers skills from the connected provider:
+#   Cursor: ~/.cursor/skills, ~/.agents/skills, ~/.codex/skills, ~/.claude/skills,
+#           and the same four directories under the session cwd
+#   Claude: ~/.claude/skills
+#   Codex: ~/.codex/skills, ~/.agents/skills, and installed plugins
+#   OpenCode: ~/.config/opencode/skills
 declare -a SPOKE_DIRS=(
   "$HOME/.cursor/skills"
   "$HOME/.claude/skills"
