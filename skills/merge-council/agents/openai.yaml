@@ -1,0 +1,4 @@
+interface:
+  display_name: "Merge Council"
+  short_description: "Argue a change with the other models before merge"
+  default_prompt: "Use $merge-council to convene the other models and argue this change before merging."
