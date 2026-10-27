@@ -1,6 +1,6 @@
 # agent-skills
 
-Reusable skill definitions for AI coding agents. Each skill is a structured Markdown file that gives an agent the instructions, workflow, and guardrails it needs to perform a specific task — setting up CI, auditing a codebase, resuming work across tools, and so on.
+Reusable skill definitions for AI coding agents. Each skill is a structured Markdown file that gives an agent the instructions, workflow, and guardrails it needs to perform a specific task — setting up CI, reviewing a diff, watching a pull request, and so on.
 
 Skills are designed to be portable across Codex, Claude Code, Cursor, Copilot, and other agent routers. The YAML frontmatter in each file provides the trigger metadata agents use to decide when to load the skill.
 
@@ -13,7 +13,7 @@ On this machine, refresh the installed skills from this checkout:
 ```
 
 Then ask your agent to use a skill by name, for example:
-`Use anti-slop to make this paragraph clearer while preserving my voice.`
+`Use pr-babysit to watch this pull request until it is merge-ready.`
 
 For a separate installation, follow [Plugin](#plugin). Use either local sync or
 the plugin, not both, to avoid duplicate skills.
@@ -23,9 +23,6 @@ the plugin, not both, to avoid duplicate skills.
 | Skill                                                                  | Description                                                                                                                   |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | [adversarial-review](skills/adversarial-review/SKILL.md)               | Send a diff to a different model family for an adversarial bug review, then triage every finding                              |
-| [agent-native-audit](skills/agent-native-audit/SKILL.md)               | Assess agent readiness with repository evidence; use optional scores for comparisons                                          |
-| [anti-slop](skills/anti-slop/SKILL.md)                                 | Detect and remove AI writing tells from prose while preserving the author's voice                                             |
-| [better-ai-design](skills/better-ai-design/SKILL.md)                   | Develop a strong visual direction for consequential interface work, with optional exploration and critique                    |
 | [ci-verify-setup](skills/ci-verify-setup/SKILL.md)                     | Set up a project-level verification command and matching CI workflow                                                          |
 | [company-profile](skills/company-profile/SKILL.md)                     | Create a reusable company fact sheet and ready-to-use descriptions, bios, and page copy                                        |
 | [derive-client](skills/derive-client/SKILL.md)                         | Capture browser traffic as HAR, then derive a reusable HTTP/CLI client instead of driving the browser every time              |
@@ -34,13 +31,12 @@ the plugin, not both, to avoid duplicate skills.
 | [learn](skills/learn/SKILL.md)                                         | Learn from Codex and OpenCode sessions to propose evidence-backed skill and instruction improvements                          |
 | [legal-compliance-checker](skills/legal-compliance-checker/SKILL.md) | Audit six app compliance risks with US-first scope and targeted international coverage |
 | [merge-council](skills/merge-council/SKILL.md)                       | Convene Opus 5.5, Grok 4.7, and GPT-6.1 Sol to argue a change before it can merge                                             |
-| [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack-style investigation, implementation, review, performance, and delivery workflows                        |
+| [open-pstack](skills/open-pstack/SKILL.md)                           | Apply portable pstack investigation, implementation, and performance workflows; point cross-lab review and PR babysitting elsewhere |
 | [opencode-security-test](skills/opencode-security-test/SKILL.md)     | Run authorized security testing with ranked open-source models in OpenCode, in-session or delegated                        |
 | [paper-design](skills/paper-design/SKILL.md)                           | Create and review native editable Paper designs through the direct Paper MCP                                                  |
 | [pr-babysit](skills/pr-babysit/SKILL.md) | Watch or repair PRs with existing monitors, one writer, and safe merge and stack handling |
 | [quick-fix-deploy-sync](skills/quick-fix-deploy-sync/SKILL.md)         | Fast-forward sync production and staging branches for hotfixes, backports, and quick deploys                                  |
-| [resume-work](skills/resume-work/SKILL.md)                             | Find the current state across tools, then continue or verify the requested work                                              |
-| [simplified-technical-english](skills/simplified-technical-english/SKILL.md) | Write, rewrite, and check technical documentation in ASD-STE100 Simplified Technical English |
+| [simplified-technical-english](skills/simplified-technical-english/SKILL.md) | Write and check ASD-STE100 when the user asks for STE, Simplified Technical English, or controlled language |
 | [test-audit](skills/test-audit/SKILL.md)                               | Prefer focused E2Es and API/database contracts; prune redundant unit and component tests                    |
 | [ui-text-audit](skills/ui-text-audit/SKILL.md)                         | Audit every screen for redundant, verbose, or unnecessary UI text and remove what doesn't help the user                       |
 
@@ -108,7 +104,7 @@ Website update notifications and activation instructions are documented in
 [website sync](docs/website-sync.md).
 
 The same skills ship as the `dxd-skills` plugin for teammates and other machines.
-Skills load namespaced, for example `dxd-skills:anti-slop`.
+Skills load namespaced, for example `dxd-skills:pr-babysit`.
 
 | Tool        | Marketplace file                   | Install                                                                                             |
 | ----------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
@@ -178,15 +174,18 @@ that discovery path.
 
 [open-pstack](skills/open-pstack/SKILL.md) is a self-contained adaptation of
 [Lauren Tan's pstack](https://github.com/cursor/plugins/tree/main/pstack), shipped
-inside `dxd-skills`. It includes investigation, debugging, architecture, review,
-performance, PR delivery, and handoff workflows without Cursor dependencies.
+inside `dxd-skills`. It includes investigation, debugging, architecture,
+performance, and handoff workflows without Cursor dependencies. A cross-lab
+bug review uses [adversarial-review](skills/adversarial-review/SKILL.md).
+Watching, repairing, or landing a pull request uses
+[pr-babysit](skills/pr-babysit/SKILL.md).
 
 After installing the plugin or syncing local skills, ask Claude Code to use
 `open-pstack`, or invoke `$open-pstack` in Codex. For example:
 
 ```text
 Use open-pstack to reproduce this bug, fix its cause, and verify the result.
-Use open-pstack to challenge this diff. Review only; do not change files.
+Use adversarial-review to challenge this diff. Review only; do not change files.
 ```
 
 For ChatGPT, supply `skills/open-pstack/SKILL.md` and the relevant files from its

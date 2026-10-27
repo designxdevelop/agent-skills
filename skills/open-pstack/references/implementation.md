@@ -20,4 +20,4 @@ For visual parity, capture the reference and candidate in matched viewport, data
 
 ## Finish
 
-Inspect the complete diff for accidental scope, redundant abstractions, stale callers, and comments that explain mechanics already visible in code. Preserve comments that record non-obvious constraints. Run checks appropriate to the changed behavior and repository requirements. Use the delivery reference only when PR or shipping work is part of the request.
+Inspect the complete diff for accidental scope, redundant abstractions, stale callers, and comments that explain mechanics already visible in code. Preserve comments that record non-obvious constraints. Run checks appropriate to the changed behavior and repository requirements. Read [delivery.md](delivery.md) only when opening a pull request is part of the request. For status, repair, monitoring, or landing, read [pr-babysit](../../pr-babysit/SKILL.md).

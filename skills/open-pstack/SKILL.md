@@ -1,6 +1,6 @@
 ---
 name: open-pstack
-description: Apply pstack-style engineering workflows across Claude, Codex, and other agents for evidence-led investigation, bug fixes, architecture, adversarial review, performance work, and verified delivery. Use when asked for open-pstack, portable pstack, or a pstack-style workflow.
+description: Apply pstack-style engineering workflows across Claude, Codex, and other agents for evidence-led investigation, bug fixes, architecture, parallel exploration, and performance work. Use when asked for open-pstack, portable pstack, or a pstack-style workflow. Cross-lab bug review is adversarial-review. Pull-request status, repair, and landing are pr-babysit.
 ---
 
 # Open PStack
@@ -23,9 +23,11 @@ Read only the reference needed for the task. Combine workflows when there is a r
 | --- | --- |
 | How/why, root cause, bug fix, runtime or captured-trace diagnosis | [investigation.md](references/investigation.md) |
 | Feature, architecture, refactor, prototype, visual parity | [implementation.md](references/implementation.md) |
-| Adversarial review, parallel exploration, competing designs | [review-and-delegation.md](references/review-and-delegation.md) |
+| Parallel exploration, competing designs | [review-and-delegation.md](references/review-and-delegation.md) |
+| Cross-lab bug review | [adversarial-review](../adversarial-review/SKILL.md) |
 | Performance improvement or repeated metric optimization | [performance.md](references/performance.md) |
-| PR status, CI repair, opening a PR, shipping a stack | [delivery.md](references/delivery.md) |
+| Opening a pull request | [delivery.md](references/delivery.md) |
+| PR status, CI repair, monitoring, or landing a PR or stack | [pr-babysit](../pr-babysit/SKILL.md) |
 | Long work, multi-phase work, resume, pause, skill evaluation | [long-running.md](references/long-running.md) |
 
 For an unmatched task, derive a short plan from its outcome, uncertainty, dependencies, and verification needs. Do not force every task through every workflow.

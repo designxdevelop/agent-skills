@@ -1,6 +1,6 @@
 {
   "name": "dxd-skills",
-  "version": "0.11.2",
+  "version": "0.12.0",
   "description": "Reusable skills for coding agents across software engineering, interface design, writing, research, and project workflows.",
   "author": {
     "name": "Design X Develop LLC",
@@ -15,7 +15,6 @@
     "agent-skills",
     "code-review",
     "ci",
-    "agent-readiness",
     "writing",
     "ui-text",
     "design",
@@ -27,11 +26,10 @@
   "interface": {
     "displayName": "DXD Skills",
     "shortDescription": "Skills for code, design & copy",
-    "longDescription": "DXD Skills is a collection of reusable workflows for developers, designers, and teams working with coding agents. Its main purpose is to improve software development and the design, writing, research, and project work that supports it.\n\nEngineering skills audit repository readiness, review code structure, send a diff to a different model family for an adversarial bug review, investigate bugs and architecture with Open PStack, set up CI verification, simplify test suites, derive HTTP clients or CLIs from browser traffic, and sync deployment branches.\n\nDesign and writing skills develop visual directions for web and app interfaces, create and edit designs in Paper, improve UI text, and remove formulaic AI-writing patterns while preserving the author's voice. Company research skills produce reusable profiles, bios, and page copy.\n\nProject and agent workflows recover the current state of ongoing work, learn from recent agent sessions to improve reusable skills, and adapt communication for readers with ADHD.\n\nThe plugin provides skill instructions and supporting files. Workflows use your agent's workspace and enabled tools; the package does not include a hosted service or MCP server.",
+    "longDescription": "DXD Skills is a collection of reusable workflows for developers, designers, and teams working with coding agents. Its main purpose is to improve software development and the design, writing, research, and project work that supports it.\n\nEngineering skills review code structure, send a diff to a different model family for an adversarial bug review, investigate bugs and architecture with Open PStack, set up CI verification, simplify test suites, derive HTTP clients or CLIs from browser traffic, and sync deployment branches.\n\nDesign and writing skills create and edit designs in Paper, improve UI text, and write Simplified Technical English when asked. Company research skills produce reusable profiles, bios, and page copy.\n\nProject and agent workflows learn from recent agent sessions to improve reusable skills and adapt communication for readers with ADHD.\n\nThe plugin provides skill instructions and supporting files. Workflows use your agent's workspace and enabled tools; the package does not include a hosted service or MCP server.",
     "developerName": "Design X Develop LLC",
     "category": "Developer Tools",
     "capabilities": [
-      "Audit repository readiness",
       "Review code structure",
       "Review diffs with a different model family",
       "Investigate bugs and architecture",
@@ -39,12 +37,10 @@
       "Simplify test suites",
       "Derive HTTP clients and CLIs",
       "Sync deployment branches",
-      "Design web and app interfaces",
       "Create and edit Paper designs",
       "Improve UI text",
-      "Edit prose while preserving voice",
+      "Write Simplified Technical English",
       "Research and write company profiles",
-      "Resume ongoing work",
       "Improve skills from agent sessions",
       "Adapt communication for ADHD"
     ],
@@ -56,8 +52,8 @@
     "composerIcon": "./assets/dxd-composer-icon.svg",
     "defaultPrompt": [
       "Run a DXD code review on this branch.",
-      "Design a clear visual direction for this interface.",
-      "Remove AI-writing tells from this draft."
+      "Send this diff to a different model family for an adversarial review.",
+      "Watch this pull request until it is merge-ready."
     ]
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: simplified-technical-english
-description: Writes and rewrites text in Simplified Technical English (ASD-STE100), a controlled language for clear technical documentation. Use when the user asks for STE, Simplified Technical English, controlled language, or plain technical writing, and when the user asks to write, rewrite, review, or check technical documentation, procedures, manuals, instructions, warnings, or reports.
+description: Write, rewrite, or check text in ASD-STE100 Simplified Technical English. Use only when the user asks for STE, Simplified Technical English, ASD-STE100, or an explicit controlled-language request.
 license: MIT for the text of this skill. The word list in references/word-list.md comes from the ASD-STE100 dictionary, which is the property of ASD. Refer to NOTICE.md.
 metadata:
   source-specification: ASD-STE100 Issue 7 (2017-01-25)
@@ -13,14 +13,16 @@ STE is a controlled language for technical documentation.
 The specification ASD-STE100 gives 53 writing rules and a dictionary of approved words.
 Text in STE is clear to readers who do not know much English.
 
-Obey the rules in this file for all the technical text that you write.
+Obey the rules in this file for text the user asked to write in Simplified Technical English.
 The rules in this file are the most important rules.
 The full set of rules is in `references/writing-rules.md`.
 The approved words are in `references/word-list.md`.
 
 ## Scope
 
-Apply STE to technical output: documentation, procedures, manuals, instructions, reports, error messages, and answers about technical subjects.
+Apply STE only for an explicit request for STE, Simplified Technical English, ASD-STE100, or controlled technical language. Use it for the technical text in that request, such as documentation, procedures, manuals, instructions, warnings, and reports.
+
+Do not apply STE to ordinary technical writing. That includes answers about technical subjects when the user did not ask for STE.
 
 Do not apply STE to:
 
