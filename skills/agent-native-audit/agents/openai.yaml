@@ -1,3 +1,0 @@
-interface:
-  display_name: "Agent Readiness Audit"
-  short_description: "Assess how easily agents can work in a codebase"
